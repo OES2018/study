@@ -1,0 +1,2 @@
+大家好，我叫罗杰炜，来自湖南，很高兴能和大家一起成为中兴的一员。我常用的编程语言是java和python，有做过两个web项目和一个大数据方面的项目，web项目都是
+用python做的，用的是Django和tornado框架；大数据项目基于spark+Hadoop做的，python和java都有用到。以上是我的一些基本情况，希望大家多多指教。
