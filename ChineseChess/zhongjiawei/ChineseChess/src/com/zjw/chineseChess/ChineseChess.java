@@ -1,156 +1,125 @@
 package com.zjw.chineseChess;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.LinkedList;
+import java.awt.event.WindowListener;
 
-import javax.swing.JFileChooser;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import javax.swing.SwingConstants;
 
 /**
- * è±¡æ£‹ä¸»ç±»
+ * ÏóÆåÖ÷Àà£»
  * @author jiawei
  *
  */
-public class ChineseChess extends JFrame implements ActionListener{
-	ChessBoard board = null;
-	MakeChessManual record = null;
-	Container con = null;
-	Demo demo = null;
-	JMenuBar bar ; //èœå•æ¡
-	JMenu fileMenu;//èœå•
-	JMenuItem CreatChessSpectrum,SaveChessSpectrum,DemoChess;//èœå•é¡¹
-	JFileChooser fileChooser = null;//æ–‡ä»¶é€‰æ‹©å™¨ï¼›
-	LinkedList 	chess = null;
-	public ChineseChess(){
-		bar = new JMenuBar();
-		fileMenu = new JMenu("ä¸­å›½è±¡æ£‹");
-		CreatChessSpectrum = new JMenuItem("åˆ¶ä½œæ£‹è°±");
-		SaveChessSpectrum = new JMenuItem("ä¿å­˜æ£‹è°±");
-		SaveChessSpectrum.setEnabled(false);
-		DemoChess =  new JMenuItem("æ¼”ç¤ºæ£‹è°±");
-		fileMenu.add(CreatChessSpectrum);
-		fileMenu.add(SaveChessSpectrum);
-		fileMenu.add(DemoChess);
-		bar.add(fileMenu);
-		setJMenuBar(bar);
-		setTitle(CreatChessSpectrum.getText());
-		SaveChessSpectrum.addActionListener(this);
-		CreatChessSpectrum.addActionListener(this);
-		DemoChess.addActionListener(this);
-		board = new ChessBoard(45, 45, 9, 10);
-		record = board.record;
-		con = getContentPane();//åˆå§‹åŒ–ä¸€ä¸ªå®¹å™¨ï¼Œç”¨æ¥åœ¨å®¹å™¨ä¸Šæ·»åŠ ä¸€äº›æ§ä»¶ï¼›
-		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,true);
-		split.setDividerSize(5);
-		split.setDividerLocation(460);
-		con.add(split,BorderLayout.CENTER);
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e){
-				System.exit(0);
-			}
-		});
-		setVisible(true);
-		setBounds(60,20,690,540);
-		fileChooser = new JFileChooser();
-		con.validate();
-		validate();
+public class ChineseChess  extends JFrame implements ActionListener{
+	public static  final Color bgColor = new Color(245,250,160);//ÆåÅÌµÄ±³¾°ÑÕÉ«£»
+	public static final Color focusbg = new Color(242,242,242);//Æå×ÓÑ¡ÖĞºóµÄ±³¾°ÑÕÉ«£»
+	public static final Color focuschar = new Color(96,95,91);//Æå×ÓÑ¡ÖĞºóµÄ×Ö·ûÑÕÉ«£»
+	public static final Color color1 = new Color(249,183,173);
+	public static final Color color2 = Color.white;//°×·½µÄÑÕÉ«£»
+	JLabel jstartGame = new JLabel("ÓÎÏ·¿ªÊ¼");
+	int width = 60; //ÉèÖÃÆåÅÌÁ½ÏßÖ®¼äµÄ¾àÀë£»
+	ChessPiece[][] chessPiece = new ChessPiece[9][10];//´´½¨Æå×ÓÊı×é£»
+	ChessBoard jpz = new ChessBoard(chessPiece, width, this);//´´½¨ÆåÅÌ
+	JPanel jpy  = new JPanel();//´´½¨Ò»¸öJPanel£»
+	JSplitPane jSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jpz, jpy);
+	
+	boolean caipan = false ;//¿É·ñ×ßÆåµÄ±êÖ¾Î»£»
+	int color = 0;//0´ú±íºìÆì£¬1´ú±í°×Æå£»
+	
+	public ChineseChess() throws HeadlessException {
+		super();
+	}
+	public void initialComponent(){
+		jpy.setLayout(null);
+		this.jstartGame.setBounds(10, 10, 50, 20);
+		jpy.add(this.jstartGame);
+		jpz.setLayout(null);
+		jpz.setBounds(0, 0, 700, 700);
+	}
+	public void initialState(){
 		
 	}
-public static void main(String[] args) {
-	new ChineseChess();
-}
-@Override
-public void actionPerformed(ActionEvent e) {
-	// TODO Auto-generated method stub
-	if(e.getSource() == CreatChessSpectrum){
-		con.removeAll();
-		SaveChessSpectrum.setEnabled(true);
-		this.setTitle(CreatChessSpectrum.getText());
-		board = new ChessBoard(45, 45, 9, 10);
-		record = board.record;
-		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,true);
-		split.setDividerSize(5);
-		split.setDividerLocation(460);
-		con.add(split,BorderLayout.CENTER);
-		validate();
+	public void initialChessPiece(){
+		//³õÊ¼»¯¸÷¸öÆå×Ó£»
+		chessPiece[0][0]=new ChessPiece(color1, "³µ", 0, 0);
+		chessPiece[1][0]=new ChessPiece(color1, "Âí", 1, 0);
+		chessPiece[2][0]=new ChessPiece(color1, "Ïà", 2, 0);
+		chessPiece[3][0]=new ChessPiece(color1, "ÊË", 3, 0);
+		chessPiece[4][0]=new ChessPiece(color1, "Ë§", 4, 0);
+		chessPiece[5][0]=new ChessPiece(color1, "ÊË", 5, 0);
+		chessPiece[6][0]=new ChessPiece(color1, "Ïà", 6, 0);
+		chessPiece[7][0]=new ChessPiece(color1, "Âí", 7, 0);
+		chessPiece[8][0]=new ChessPiece(color1, "³µ", 8, 0);
+		chessPiece[1][2]=new ChessPiece(color1, "ÅÚ", 1, 2);
+		chessPiece[7][2]=new ChessPiece(color1, "ÅÚ", 7, 2);
+		chessPiece[0][3]=new ChessPiece(color1, "±ø", 0, 3);
+		chessPiece[2][3]=new ChessPiece(color1, "±ø", 2, 3);
+		chessPiece[4][3]=new ChessPiece(color1, "±ø", 4, 3);
+		chessPiece[6][3]=new ChessPiece(color1, "±ø", 6, 3);
+		chessPiece[8][3]=new ChessPiece(color1, "±ø", 8, 3);
+		
+		chessPiece[0][9]=new ChessPiece(color2, "³µ", 0, 9);
+		chessPiece[1][9]=new ChessPiece(color2, "Âí", 1, 9);
+		chessPiece[2][9]=new ChessPiece(color2, "Ïó", 2, 9);
+		chessPiece[3][9]=new ChessPiece(color2, "ÊË", 3, 9);
+		chessPiece[4][9]=new ChessPiece(color2, "½«", 4, 9);
+		chessPiece[5][9]=new ChessPiece(color2, "ÊË", 5, 9);
+		chessPiece[6][9]=new ChessPiece(color2, "Ïó", 6, 9);
+		chessPiece[7][9]=new ChessPiece(color2, "Âí", 7, 9);
+		chessPiece[8][9]=new ChessPiece(color2, "³µ", 8, 9);
+		chessPiece[1][7]=new ChessPiece(color2, "ÅÚ", 1, 7);
+		chessPiece[7][7]=new ChessPiece(color2, "ÅÚ", 7, 7);
+		chessPiece[0][6]=new ChessPiece(color2, "×ä", 0, 6);
+		chessPiece[2][6]=new ChessPiece(color2, "×ä", 2, 6);
+		chessPiece[4][6]=new ChessPiece(color2, "×ä", 4, 6);
+		chessPiece[6][6]=new ChessPiece(color2, "×ä", 6, 6);
+		chessPiece[8][6]=new ChessPiece(color2, "×ä", 8, 6);
+	}
+	public void initialFrame(){
+		this.setTitle("ÖĞ¹úÏóÆå");
+		Image image = new ImageIcon("ico.gif").getImage();
+		this.setIconImage(image);//ÉèÖÃÍ¼±ê£»
+		this.add(this.jSplitPane);
+		jSplitPane.setDividerLocation(730);//ÉèÖÃ·Ö¸îÏßÎ»ÖÃ¼°¿í¶È£»
+		jSplitPane.setVisible(true);//ÉèÖÃ¿É¼ûĞÔ£»
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(){
+				System.exit(0);//ÍË³ö£»
+			}
+		});
 	}
 	
-	if (e.getSource() == SaveChessSpectrum) {  
-        int state = fileChooser.showSaveDialog(null);  
-        File saveFile = fileChooser.getSelectedFile();  
-        if (saveFile != null && state == JFileChooser.APPROVE_OPTION) {  
-            try {  
-                FileOutputStream outOne = new FileOutputStream(saveFile);  
-                ObjectOutputStream outTwo = new ObjectOutputStream(outOne);  
-                outTwo.writeObject(record.è·å–æ£‹è°±());  
-                outOne.close();  
-                outTwo.close();  
-            } catch (IOException event) {  
-            }  
-        }  
-    }  
-	
-	if(e.getSource() == DemoChess){
-		con.removeAll();  
-        con.repaint();  
-        con.validate();  
-        validate();  
-        SaveChessSpectrum.setEnabled(false); 
-        int state = fileChooser.showOpenDialog(null);  
-        File openFile = fileChooser.getSelectedFile(); 
-        if (openFile != null && state == JFileChooser.APPROVE_OPTION) {  
-            try {  
-                FileInputStream inOne = new FileInputStream(openFile);  
-                ObjectInputStream inTwo = new ObjectInputStream(inOne);  
-                chess = (LinkedList) inTwo.readObject();  
-                inOne.close();  
-                inTwo.close();  
-                ChessBoard board = new ChessBoard(45, 45, 9, 10);  
-                demo = new Demo(board);  
-              //  demo.setæ£‹è°±(chess);  
-                //con.add(demo, BorderLayout.CENTER);  
-                con.validate();  
-                validate();  
-                this.setTitle(DemoChess.getText() + ":" + openFile);  
-            } catch (Exception event) {  
-                JLabel label = new JLabel("ä¸æ˜¯æ£‹è°±æ–‡ä»¶");  
-                label.setFont(new Font("éš¶ä¹¦", Font.BOLD, 60));  
-                label.setForeground(Color.red);  
-                label.setHorizontalAlignment(SwingConstants.CENTER);  
-                con.add(label, BorderLayout.CENTER);  
-                con.validate();  
-                this.setTitle("æ²¡æœ‰æ‰“å¼€æ£‹è°±");  
-                validate();  
-            }  
-        } else {  
-            JLabel label = new JLabel("æ²¡æœ‰æ‰“å¼€æ£‹è°±æ–‡ä»¶å‘¢");  
-            label.setFont(new Font("éš¶ä¹¦", Font.BOLD, 50));  
-            label.setForeground(Color.pink);  
-            label.setHorizontalAlignment(SwingConstants.CENTER);  
-            con.add(label, BorderLayout.CENTER);  
-            con.validate();  
-            this.setTitle("æ²¡æœ‰æ‰“å¼€æ£‹è°±æ–‡ä»¶å‘¢");  
-            validate();  
-        }  
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==this.jstartGame){
+			this.jstartGame_event();
+		}
 	}
-}
+	public void jstartGame_event(){
+		
+	}
+	public void next(){ //½«Æå×ÓÊı×é¶¼ÖÃ¿Õ£»
+		for (int i = 0; i < 9; i++) {
+			for (int j =0;j<10;j++){
+				this.chessPiece[i][j]=null;
+			}
+		}
+		this.caipan = false;
+		this.initialChessPiece();//ÖØĞÂ³õÊ¼»¯Æå×Ó£»
+		repaint();//ÖØĞÂ»æÖÆ£»
+	}
+	public static void main (String args[]){
+		
+	}
 }

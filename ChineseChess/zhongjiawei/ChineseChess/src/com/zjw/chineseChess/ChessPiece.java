@@ -1,57 +1,60 @@
 package com.zjw.chineseChess;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 
 /**
- * æ£‹å­ç±»
+ * Æå×ÓÀà£»
  * @author jiawei
  *
  */
 public class ChessPiece {
-	String name;//æ£‹å­åå­—ï¼›
-	Color backColor = null ,foreColor;
-	String color = null;
-	ChessBoard board = null;
-	int width,height; //é•¿å®½ï¼›
-	public ChessPiece(String name, Color bc, Color fc,
-			 ChessBoard board, int width, int height) {
+	private Color color ;//Æå×ÓµÄÑÕÉ«£»
+	private String name ;//Æå×ÓµÄÃû×Ö£»
+	private int x;
+	private int y;
+	private boolean focus = false;//Æå×ÓµÄ×´Ì¬£¬ÊÇ·ñ±»Ñ¡ÖĞ£»
+	
+	public ChessPiece() {
 		super();
+	}
+	//Éú³É¹¹Ôìº¯Êı£»
+	public ChessPiece(Color color, String name, int x, int y) {
+		super();
+		this.color = color;
 		this.name = name;
-		backColor = bc ;
-		foreColor = fc ;
-		this.board = board;
-		this.width = width;
-		this.height = height;
-		
+		this.x = x;
+		this.y = y;
 	}
-	public void paint(Graphics g){
-		g.drawImage(board.pieceImg, 2, 2, width-2, height-2, null);
-		g.setColor(foreColor);
-		g.setFont(new Font("æ¥·ä½“", Font.BOLD, 26));
-		g.drawString(name, 7, height-8);//åœ¨æ£‹å­ä¸Šç»˜åˆ¶æ£‹å­å
-		g.setColor(Color.black);
-		float lineWidth = 2.3f;
-		((Graphics2D)g).setStroke(new BasicStroke(lineWidth));//è®¾ç½®çº¿å®½ï¼›
-		((Graphics2D)g).drawOval(2, 2, width-2, height-2);
+	//Éú³Ésetget·½·¨£»
+	public Color getColor() { 
+		return color;
 	}
-	public int getWidth(){
-		return width;
+	public void setColor(Color color) {
+		this.color = color;
 	}
-	public int getHeight(){
-		return height;
-	}
-	public String getName(){
+	public String getName() {
 		return name;
 	}
-	public Color getChessPieceColor(){
-		return foreColor;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public void setChessPiece(String chessPiece){
-		
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	public boolean isFocus() {
+		return focus;
+	}
+	public void setFocus(boolean focus) {
+		this.focus = focus;
 	}
 	
 }
