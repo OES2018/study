@@ -1,0 +1,13 @@
+# Comiled class file
+*.class
+
+# Log file
+*.log
+
+# Pacage Files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
