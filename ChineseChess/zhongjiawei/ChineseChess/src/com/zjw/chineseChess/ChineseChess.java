@@ -10,10 +10,12 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.event.AncestorListener;
 
 /**
  * 象棋主类；
@@ -24,9 +26,9 @@ public class ChineseChess  extends JFrame implements ActionListener{
 	public static  final Color bgColor = new Color(245,250,160);//棋盘的背景颜色；
 	public static final Color focusbg = new Color(242,242,242);//棋子选中后的背景颜色；
 	public static final Color focuschar = new Color(96,95,91);//棋子选中后的字符颜色；
-	public static final Color color1 = new Color(249,183,173);
+	public static final Color color1 = new Color(249,183,173);//红颜色
 	public static final Color color2 = Color.white;//白方的颜色；
-	JLabel jstartGame = new JLabel("游戏开始");
+	JButton jstartGame = new JButton("游戏开始");
 	int width = 60; //设置棋盘两线之间的距离；
 	ChessPiece[][] chessPiece = new ChessPiece[9][10];//创建棋子数组；
 	ChessBoard jpz = new ChessBoard(chessPiece, width, this);//创建棋盘
@@ -36,8 +38,15 @@ public class ChineseChess  extends JFrame implements ActionListener{
 	boolean caipan = false ;//可否走棋的标志位；
 	int color = 0;//0代表红旗，1代表白棋；
 	
-	public ChineseChess() throws HeadlessException {
-		super();
+	public ChineseChess()  {
+		initialComponent();
+		this.addListener();
+		initialChessPiece();
+		initialFrame();
+		initialState();
+	}
+	public void addListener(){
+		this.jstartGame.addActionListener(this);
 	}
 	public void initialComponent(){
 		jpy.setLayout(null);
@@ -91,7 +100,9 @@ public class ChineseChess  extends JFrame implements ActionListener{
 		this.setIconImage(image);//设置图标；
 		this.add(this.jSplitPane);
 		jSplitPane.setDividerLocation(730);//设置分割线位置及宽度；
-		jSplitPane.setVisible(true);//设置可见性；
+		jSplitPane.setDividerSize(4);
+		this.setBounds(30,30,930,730);//设置窗体大小
+		setVisible(true);//设置可见性；
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(){
 				System.exit(0);//退出；
@@ -120,6 +131,6 @@ public class ChineseChess  extends JFrame implements ActionListener{
 		repaint();//重新绘制；
 	}
 	public static void main (String args[]){
-		
+		new ChineseChess();
 	}
 }
