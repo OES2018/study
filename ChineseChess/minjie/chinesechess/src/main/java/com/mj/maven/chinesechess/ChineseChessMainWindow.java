@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.mj.maven.exceptions.InvalidChoosenCommand;
 /**
 *@auther minjie 
 *@E-mail jie_min_jimmy@163.com
@@ -134,13 +135,12 @@ public class ChineseChessMainWindow implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e){
 		switch(e.getActionCommand()){
 		case "对战电脑":
 			//to do
 			break;
 		case "双人对战":
-			System.out.println("ID= "+e.getID()+"command= "+e.getActionCommand()+"Souce= "+e.getSource().toString());
 			startBattleToPlayerWindow();
 			break;
 		case "设置":
@@ -150,9 +150,11 @@ public class ChineseChessMainWindow implements ActionListener{
 			//to do
 			break;
 		default:
-			//System.out.println("ID= "+e.getID()+"command= "+e.getActionCommand()+"Souce= "+e.getSource().toString());
-			System.out.println("该选择还未完成");
-			break;
+			try {
+				throw new InvalidChoosenCommand("该选择还未完成");
+			} catch (InvalidChoosenCommand e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
