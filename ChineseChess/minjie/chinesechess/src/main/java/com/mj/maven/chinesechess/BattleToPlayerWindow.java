@@ -83,7 +83,7 @@ public class BattleToPlayerWindow {
 	private void setBattleToPlayerFrame() {
 		battleToPlayerFrame = new JFrame();
 		battleToPlayerFrame.setTitle("双人对战");
-		battleToPlayerFrame.setBounds(200, 50, 710, 660);
+		battleToPlayerFrame.setBounds(400, 100, 710, 660);
 		battleToPlayerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		battleToPlayerFrame.getContentPane().setLayout(new BorderLayout(0, 0));	
 		battleToPlayerFrame.setResizable(false);
@@ -120,9 +120,7 @@ public class BattleToPlayerWindow {
 		chessBoardPanel.setLayout(null);
 		JLabel imageLabel=new JLabel(img);
 		imageLabel.setBounds(0,0,img.getIconWidth(),img.getIconHeight());
-		chessBoardPanel.add(imageLabel);//注意这里是关键，将背景标签添加到jfram的LayeredPane面板里。
-	//	System.out.println(img.getIconWidth());
-	//	System.out.println(img.getIconHeight());
+		chessBoardPanel.add(imageLabel);
 		chessBoardPanel.setOpaque(false);
 	}
 	
