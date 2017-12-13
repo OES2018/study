@@ -1,9 +1,7 @@
 package com.mj.maven.chinesechess;
 
 import java.awt.BorderLayout;
-
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
@@ -26,7 +24,7 @@ public class BattleToPlayerWindow {
 	private JFrame battleToPlayerFrame;
 
 	private JPanel playerInfoPanel;
-	private JPanel chessBoardPanel;
+	private ChessBoard chessBoard;
 	private JPanel undoAndOptionsFatherPanel;
 	private JPanel undoAndOptionsChildPanel;
 	
@@ -67,8 +65,8 @@ public class BattleToPlayerWindow {
 		addPlayerTwoInfoPanel();
 		
 		
-		addChessBoardPanel();
-		addChessBoardBackground();//添加棋盘背景图
+		addChessBoard();
+
 		
 		addUndoAndOptionsFatherPanel();
 		addUndoAndOptionsChildPanel();
@@ -83,7 +81,7 @@ public class BattleToPlayerWindow {
 	private void setBattleToPlayerFrame() {
 		battleToPlayerFrame = new JFrame();
 		battleToPlayerFrame.setTitle("双人对战");
-		battleToPlayerFrame.setBounds(400, 100, 710, 660);
+		battleToPlayerFrame.setBounds(400, 100, 699, 648);
 		battleToPlayerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		battleToPlayerFrame.getContentPane().setLayout(new BorderLayout(0, 0));	
 		battleToPlayerFrame.setResizable(false);
@@ -109,20 +107,14 @@ public class BattleToPlayerWindow {
 		playerTwoInfoPanel.setLayout(new BorderLayout(0, 0));		
 	}
 	
-	private void addChessBoardPanel() {
-		chessBoardPanel = new JPanel();
-		chessBoardPanel.setPreferredSize(new Dimension(CHESS_BOARD_WEDTH,CHESS_BOARD_HEIGHT));
-		battleToPlayerFrame.getContentPane().add(chessBoardPanel, BorderLayout.CENTER);
+	private void addChessBoard() {
+		chessBoard = new ChessBoard();
+		chessBoard.setPreferredSize(new Dimension(CHESS_BOARD_WEDTH,CHESS_BOARD_HEIGHT));
+		chessBoard.setLayout(null);
+		battleToPlayerFrame.getContentPane().add(chessBoard, BorderLayout.CENTER);
 	}
 	
-	private void addChessBoardBackground() {
-		ImageIcon img=new ImageIcon("src/main/resources/images/chessboard.gif");
-		chessBoardPanel.setLayout(null);
-		JLabel imageLabel=new JLabel(img);
-		imageLabel.setBounds(0,0,img.getIconWidth(),img.getIconHeight());
-		chessBoardPanel.add(imageLabel);
-		chessBoardPanel.setOpaque(false);
-	}
+
 	
 	private void addUndoAndOptionsFatherPanel() {
 		undoAndOptionsFatherPanel = new JPanel();
