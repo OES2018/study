@@ -14,13 +14,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.mj.maven.exceptions.InvalidChoosenCommand;
 /**
 *@auther minjie 
 *@E-mail jie_min_jimmy@163.com
 *@version 创建时间：2017年12月10日
 **/
 
-public class ChineseChessMainWindow {
+public class ChineseChessMainWindow implements ActionListener{
 
 	private JFrame mainFrame;
 	private JPanel gameModeChoosenPanel;
@@ -99,6 +100,7 @@ public class ChineseChessMainWindow {
 		battelToComputerButton.setBackground(Color.LIGHT_GRAY);
 		battelToComputerButton.setOpaque(false);
 		battelToComputerButton.setBorder(null);
+		battelToComputerButton.addActionListener(this);
 		gameModeChoosenPanel.add(battelToComputerButton);
 	}
 	
@@ -108,22 +110,7 @@ public class ChineseChessMainWindow {
 		battelToPlayerButton.setBackground(Color.LIGHT_GRAY);
 		battelToPlayerButton.setOpaque(false);
 		battelToPlayerButton.setBorder(null);
-		battelToPlayerButton.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							BattleToPlayerWindow battleToPlayerwindow = new BattleToPlayerWindow();
-							battleToPlayerwindow.getBattleToPlayerFrame().setVisible(true);
-							mainFrame.setVisible(false);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});				
-			}
-		});
+		battelToPlayerButton.addActionListener(this);
 		gameModeChoosenPanel.add(battelToPlayerButton);		
 	}
 	
@@ -133,6 +120,7 @@ public class ChineseChessMainWindow {
 		setUpButton.setBackground(Color.LIGHT_GRAY);
 		setUpButton.setOpaque(false);
 		setUpButton.setBorder(null);
+		setUpButton.addActionListener(this);
 		gameModeChoosenPanel.add(setUpButton);		
 	}
 	
@@ -142,7 +130,46 @@ public class ChineseChessMainWindow {
 		helpButton.setBackground(Color.LIGHT_GRAY);
 		helpButton.setOpaque(false);
 		helpButton.setBorder(null);
+		helpButton.addActionListener(this);
 		gameModeChoosenPanel.add(helpButton);		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e){
+		switch(e.getActionCommand()){
+		case "对战电脑":
+			//to do
+			break;
+		case "双人对战":
+			startBattleToPlayerWindow();
+			break;
+		case "设置":
+			//to do
+			break;
+		case "帮助":
+			//to do
+			break;
+		default:
+			try {
+				throw new InvalidChoosenCommand("该选择还未完成");
+			} catch (InvalidChoosenCommand e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	private void startBattleToPlayerWindow() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					BattleToPlayerWindow battleToPlayerwindow = new BattleToPlayerWindow();
+					battleToPlayerwindow.getBattleToPlayerFrame().setVisible(true);
+					mainFrame.setVisible(false);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});		
 	}
 
 }
