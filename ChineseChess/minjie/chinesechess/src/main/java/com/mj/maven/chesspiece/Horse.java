@@ -1,6 +1,4 @@
-package com.mj.maven.chinesechess;
-
-import java.awt.event.MouseEvent;
+package com.mj.maven.chesspiece;
 
 /**
 *@auther minjie 

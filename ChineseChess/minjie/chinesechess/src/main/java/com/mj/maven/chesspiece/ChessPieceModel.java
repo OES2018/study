@@ -1,5 +1,4 @@
-package com.mj.maven.chinesechess;
-
+package com.mj.maven.chesspiece;
 /**
 *@auther minjie 
 *@E-mail jie_min_jimmy@163.com

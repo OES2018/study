@@ -1,4 +1,4 @@
-package com.mj.maven.chinesechess;
+package com.mj.maven.chesspiece;
 
 import java.awt.Graphics;
 import java.awt.event.MouseListener;
@@ -38,6 +38,7 @@ public abstract class ChessPieceModelImp extends JLabel implements ChessPieceMod
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		this.setBounds((int)(x*MAP_TO_REALISTIC_POSITION_X_FACTOR-chessPieceImage.getWidth()/2), (int)(y*MAP_TO_REALISTIC_POSITION_Y_FACTOR-chessPieceImage.getHeight()/2),chessPieceImage.getWidth(), chessPieceImage.getHeight());
 		 g.drawImage(chessPieceImage, (int)(x*MAP_TO_REALISTIC_POSITION_X_FACTOR-chessPieceImage.getWidth()/2), (int)(y*MAP_TO_REALISTIC_POSITION_Y_FACTOR-chessPieceImage.getHeight()/2),chessPieceImage.getWidth(), chessPieceImage.getHeight(), null); 
     }
 	

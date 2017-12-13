@@ -12,6 +12,15 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import com.mj.maven.chesspiece.Bishop;
+import com.mj.maven.chesspiece.Cannon;
+import com.mj.maven.chesspiece.ChessPieceModelImp;
+import com.mj.maven.chesspiece.Guard;
+import com.mj.maven.chesspiece.Horse;
+import com.mj.maven.chesspiece.King;
+import com.mj.maven.chesspiece.Pawn;
+import com.mj.maven.chesspiece.Rook;
+
 /**
 *@auther minjie 
 *@E-mail jie_min_jimmy@163.com
@@ -128,12 +137,6 @@ public class ChessBoard extends JPanel implements MouseListener,MouseMotionListe
     }  
 
 	public void addChessBoardBackground(Graphics g){
-/*		 ImageIcon imgIcon=new ImageIcon("src/main/resources/images/chessboard.gif");
-	     Image img=imgIcon.getImage();
-	     //下面这行是为了背景图片可以跟随窗口自行调整大小，可以自己设置成固定大小  
-	     g.drawImage(img, 0, 0,this.getWidth(), this.getHeight(), this);  */
-
-		
 		BufferedImage chessBoardBackground=null;
 		try {
 			chessBoardBackground = ImageIO.read(new File("src/main/resources/images/chessboard.gif"));
@@ -141,32 +144,29 @@ public class ChessBoard extends JPanel implements MouseListener,MouseMotionListe
 			e.printStackTrace();
 		}
 		g.drawImage(chessBoardBackground, 0, 0,this.getWidth(), this.getHeight(), null); 
-
-				System.out.println(this.getWidth()+": "+this.getHeight());
-	    int imgWidth = chessBoardBackground.getWidth(this);  
-	    int imgHeight = chessBoardBackground.getHeight(this);// 获得图片的宽度与高度  
-	    int FWidth = getWidth();  
-	    int FHeight = getHeight();// 获得窗口的宽度与高度  
-	    int x = (FWidth - imgWidth) / 2;  
-	    int y = (FHeight - imgHeight) / 2;  
-	    System.out.println(x+":"+y);
-	    //  g.drawImage(img, x, y, null);
 	}
 	
 	private void addChessPieces(Graphics g) {
-		for(ChessPieceModelImp redCheessPiece: redChessPieces){
-			redCheessPiece.paint(g);
+		for(ChessPieceModelImp redChessPiece: redChessPieces){
+			redChessPiece.paint(g);
+			redChessPiece.addMouseListener(this);
+			redChessPiece.addMouseMotionListener(this);
+			this.add(redChessPiece);
+			
 		}
 			
 		for(ChessPieceModelImp blackChessPiece: blackChessPieces){
 			blackChessPiece.paint(g);
+			blackChessPiece.addMouseListener(this);
+			blackChessPiece.addMouseMotionListener(this);
+			this.add(blackChessPiece);
 		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println("mouseClicked");
+		System.out.println("mouseClicked"+arg0.getSource());
 		
 	}
 
