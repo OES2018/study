@@ -8,7 +8,7 @@ ChessMain.java: 主文件,游戏开始的入口
 
 ### 遇到的问题以及解决方法：  
 1. 棋盘用图片：  
-坐标位置不好控制 —— 采用Graphics绘制棋盘, 并添加到Container中（自定义了一个paintChessBoard方法用于绘制棋盘）, 棋子棋盘坐标斗志相对于Container的，在设置规则的时候比较好控制。  
+坐标位置不好控制 —— 采用Graphics绘制棋盘, 并添加到Container中（自定义了一个paintChessBoard方法用于绘制棋盘）, 棋子棋盘坐标都是相对于Container的，在设置规则的时候比较好控制。  
 2. 规则的制定：  
 对游戏规则的不熟悉 —— 查看象棋游戏规则  
 3. 鼠标点击事件：  
