@@ -3,7 +3,7 @@
 ChessBoard.java: 控件的添加，棋盘使用Graphics绘制   
 ChessPiece.java: 棋子使用的是图片，该类对棋子位置进行初始化   
 ChessRule.java: 对棋子移动和吃棋规则的制定  
-MouseClickedEvent.java: 鼠标点击事件的实现
+MouseClickedEvent.java: 鼠标点击事件的实现  
 ChessMain.java: 主文件,游戏开始的入口
 
 ### 遇到的问题以及解决方法：  
