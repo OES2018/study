@@ -22,63 +22,63 @@ import javax.swing.JPanel;
 
 public class ChessBoard extends JFrame implements ActionListener,MouseListener,Runnable{
 
-	//32¿ÅÆå×Ó
+	//32é¢—æ£‹å­
 	JLabel play[] = new JLabel[32];
-	ChessPieces chessPieces;//Æå×ÓÍ¼Æ¬
-	//ÆåÅÌ
+	ChessPieces chessPieces;//æ£‹å­å›¾ç‰‡
+	//æ£‹ç›˜
 	JLabel image;	
-	//´°¸ñ
+	//çª—æ ¼
 	Container con;
 	
-	//¹æÔòÀà¶ÔÏó,ÓÃÓÚÆå×ÓÒÆ¶¯ÒÔ¼°³Ô×Ó£¬ÊäÓ®µÈ¹æÔò
+	//è§„åˆ™ç±»å¯¹è±¡,ç”¨äºæ£‹å­ç§»åŠ¨ä»¥åŠåƒå­ï¼Œè¾“èµ¢ç­‰è§„åˆ™
 	ChessRule rule;
 	
 	/**
-	** µ¥»÷Æå×Ó
-	** chessManClick = true ÉÁË¸Æå×Ó ²¢¸øÏß³ÌÏìÓ¦
-	** chessManClick = false ³ÔÆå×Ó Í£Ö¹ÉÁË¸  ²¢¸øÏß³ÌÏìÓ¦
+	** å•å‡»æ£‹å­
+	** chessManClick = true é—ªçƒæ£‹å­ å¹¶ç»™çº¿ç¨‹å“åº”
+	** chessManClick = false åƒæ£‹å­ åœæ­¢é—ªçƒ  å¹¶ç»™çº¿ç¨‹å“åº”
 	*/
 	boolean chessManClick;
 	
 	/**
-	** ¿ØÖÆÍæ¼Ò×ßÆå
-	** chessPlayClick=1 ºÚÆå×ßÆå
-	** chessPlayClick=2 ºìÆå×ßÆå
-	** chessPlayClick=3 Ë«·½¶¼²»ÄÜ×ßÆå
+	** æ§åˆ¶ç©å®¶èµ°æ£‹
+	** chessPlayClick=1 é»‘æ£‹èµ°æ£‹
+	** chessPlayClick=2 çº¢æ£‹èµ°æ£‹
+	** chessPlayClick=3 åŒæ–¹éƒ½ä¸èƒ½èµ°æ£‹
 	*/
-	int chessPlayClick=2;//Ä¬ÈÏºìÆå¿ªÊ¼ÏÈ×ß
+	int chessPlayClick=2;//é»˜è®¤çº¢æ£‹å¼€å§‹å…ˆèµ°
 	
-	//¿ØÖÆÆå×ÓÉÁË¸µÄÏß³Ì
+	//æ§åˆ¶æ£‹å­é—ªçƒçš„çº¿ç¨‹
 	static Thread tmain;
-	//°ÑµÚÒ»´ÎµÄµ¥»÷Æå×Ó¸øÏß³ÌÏìÓ¦
+	//æŠŠç¬¬ä¸€æ¬¡çš„å•å‡»æ£‹å­ç»™çº¿ç¨‹å“åº”
 	static int Man,i;
 	
 
 	ChessBoard() throws IOException{
-		new ChessBoard("ÖĞ¹úÏóÆå");
+		new ChessBoard("ä¸­å›½è±¡æ£‹");
 	}
-	//ÓĞ²Î¹¹Ôìº¯Êı
+	//æœ‰å‚æ„é€ å‡½æ•°
 	ChessBoard(String Title) throws IOException{
-		//»ñÈ¡´°¸ñÒıÓÃ
+		//è·å–çª—æ ¼å¼•ç”¨
 		con = this.getContentPane();
 		con.setLayout(null);
 		chessPieces=new ChessPieces();
-		//ÊµÀı»¯¹æÔòÀà
+		//å®ä¾‹åŒ–è§„åˆ™ç±»
 		rule = new ChessRule();
 		
-		//Ìí¼ÓÆå×Ó
+		//æ·»åŠ æ£‹å­
 	    drawChessMan();
-	    //×¢²áÆå×ÓÒÆ¶¯¼àÌı
+	    //æ³¨å†Œæ£‹å­ç§»åŠ¨ç›‘å¬
 	    for (int i=0;i<32;i++){
 	  		con.add(play[i]);
 	  		play[i].addMouseListener(this);
 	  	}
-	    //Ìí¼ÓÆåÅÌ±êÇ©
+	    //æ·»åŠ æ£‹ç›˜æ ‡ç­¾
 	    con.add(image = new JLabel(chessPieces.getTable()));
-	    image.setBounds(0,30,558,620);//ÉèÖÃÆåÅÌ´óĞ¡
-	    image.addMouseListener(this);//×¢²áÆåÅÌ¼àÌıÊÂ¼ş
+	    image.setBounds(0,30,558,620);//è®¾ç½®æ£‹ç›˜å¤§å°
+	    image.addMouseListener(this);//æ³¨å†Œæ£‹ç›˜ç›‘å¬äº‹ä»¶
 	    
-	    //×¢²á´°Ìå¹Ø±Õ¼àÌı
+	    //æ³¨å†Œçª—ä½“å…³é—­ç›‘å¬
 	  	this.addWindowListener(
 	  		new WindowAdapter() {
 	  			public void windowClosing(WindowEvent we){
@@ -87,7 +87,7 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 	  		}
 	  	);
 	  	
-		//´°Ìå¾ÓÖĞ
+		//çª—ä½“å±…ä¸­
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize = this.getSize();
 		
@@ -100,7 +100,7 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 		
 		this.setLocation((screenSize.width - frameSize.width) / 2 - 280 ,(screenSize.height - frameSize.height ) / 2 - 350);
 	
-		//ÉèÖÃ
+		//è®¾ç½®
 		//this.setIconImage(chessPieces.getRedgenera().getImage());
 		this.setResizable(false);
 		this.setTitle(Title);
@@ -108,135 +108,135 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 		this.setVisible(true);
 	}
 	
-	//Ìí¼ÓÆå×Ó·½·¨
+	//æ·»åŠ æ£‹å­æ–¹æ³•
 	public void drawChessMan() {
-		//Á÷³Ì¿ØÖÆ
+		//æµç¨‹æ§åˆ¶
 		int i,k;
-		//Í¼±ê
+		//å›¾æ ‡
 		Icon in;
 						
-		//ºÚÉ«Æå×Ó		
-		//³µ
+		//é»‘è‰²æ£‹å­		
+		//è½¦
 		in = chessPieces.getBlackcar();
 		for (i=0,k=24;i<2;i++,k+=456){		
 			play[i] = new JLabel(in);
 			play[i].setBounds(k,56,55,55);	
-			play[i].setName("³µ1");			
+			play[i].setName("è½¦1"+i);//åŠ içš„ç›®çš„æ˜¯è®©æ¯ä¸ªæ£‹å­æœ‰ç‹¬ä¸€æ— äºŒçš„åå­—			
 		}	
 				
-		//Âí
+		//é©¬
 		in = chessPieces.getBlackhorse();
 		for (i=4,k=81;i<6;i++,k+=342){	
 			play[i] = new JLabel(in);
 			play[i].setBounds(k,56,55,55);
-			play[i].setName("Âí1");
+			play[i].setName("é©¬1"+i);
 		}
 				
-		//Ïà
+		//ç›¸
 		in = chessPieces.getBlackelephant();
 		for (i=8,k=138;i<10;i++,k+=228){	
 			play[i] = new JLabel(in);
 			play[i].setBounds(k,56,55,55);
-			play[i].setName("Ïó1");
+			play[i].setName("è±¡1"+i);
 		}
 				
-		//Ê¿
+		//å£«
 		in = chessPieces.getBlackofficia();
 		for (i=12,k=195;i<14;i++,k+=114){
 			play[i] = new JLabel(in);
 			play[i].setBounds(k,56,55,55);
-			play[i].setName("Ê¿1");
+			play[i].setName("å£«1"+i);
 		}
 				
-		//×ä
+		//å’
 		in = chessPieces.getBlacksoldier();
 		for (i=16,k=24;i<21;i++,k+=114){
 			play[i] = new JLabel(in);
 			play[i].setBounds(k,227,55,55);
-			play[i].setName("×ä1");
+			play[i].setName("å’1"+i);
 		}
 				
-		//ÅÚ
+		//ç‚®
 		in = chessPieces.getBlackcannon();			
 		for (i=26,k=81;i<28;i++,k+=342){
 			play[i] = new JLabel(in);
 			play[i].setBounds(k,170,55,55);
-			play[i].setName("ÅÚ1");
+			play[i].setName("ç‚®1"+i);
 		}
 				
-		//½«
+		//å°†
 		in = chessPieces.getBlackgenera();
 		play[30] = new JLabel(in);
 		play[30].setBounds(252,56,55,55);
-		play[30].setName("½«1");
+		play[30].setName("å°†1");
 
-		//ºìÉ«Æå×Ó
-		//³µ
+		//çº¢è‰²æ£‹å­
+		//è½¦
 		in = chessPieces.getRedcar();
 		for (i=2,k=24;i<4;i++,k+=456){
 			play[i] = new JLabel(in);
 			play[i].setBounds(k,569,55,55);
-			play[i].setName("³µ2");
+			play[i].setName("è½¦2"+i);
 		}
 				
-		//Âí
+		//é©¬
 		in = chessPieces.getRedhorse();
 		for (i=6,k=81;i<8;i++,k+=342){
 			play[i] = new JLabel(in);
 			play[i].setBounds(k,569,55,55);
-			play[i].setName("Âí2");
+			play[i].setName("é©¬2"+i);
 		}
 				
-		//Ïà
+		//ç›¸
 		in = chessPieces.getRedelephant();			
 		for (i=10,k=138;i<12;i++,k+=228){
 			play[i] = new JLabel(in);
 			play[i].setBounds(k,569,55,55);
-			play[i].setName("Ïó2");
+			play[i].setName("è±¡2"+i);
 		}
 				
-	    //Ê¿
+	    //å£«
 		in = chessPieces.getRedofficia();
 		for (i=14,k=195;i<16;i++,k+=114){
 			play[i] = new JLabel(in);
 			play[i].setBounds(k,569,55,55);
-			play[i].setName("Ê¿2");
+			play[i].setName("å£«2"+i);
 		}
 				
-		//±ø
+		//å…µ
 		in = chessPieces.getRedsoldier();
 		for (i=21,k=24;i<26;i++,k+=114){
 			play[i] = new JLabel(in);
 			play[i].setBounds(k,398,55,55);
-			play[i].setName("×ä2");
+			play[i].setName("å’2"+i);
 		}
 				
-		//ÅÚ
+		//ç‚®
 		in = chessPieces.getRedcannon();
 		for (i=28,k=81;i<30;i++,k+=342){
 			play[i] = new JLabel(in);
 			play[i].setBounds(k,455,55,55);
-			play[i].setName("ÅÚ2");
+			play[i].setName("ç‚®2"+i);
 		}
 				
-		//Ë§
+		//å¸…
 		in = chessPieces.getRedgenera();			
 		play[31] = new JLabel(in);
 		play[31].setBounds(252,569,55,55);		
-		play[31].setName("Ë§2");
+		play[31].setName("å¸…2");
 	}
 	
 	/**
-	** Ïß³Ì·½·¨¿ØÖÆÆå×ÓÉÁË¸
+	** çº¿ç¨‹æ–¹æ³•æ§åˆ¶æ£‹å­é—ªçƒ
 	*/
 	@Override
 	public void run() {
 		while (true){
-			//µ¥»÷Æå×ÓµÚÒ»ÏÂ¿ªÊ¼ÉÁË¸
+			//å•å‡»æ£‹å­ç¬¬ä¸€ä¸‹å¼€å§‹é—ªçƒ
 			if (chessManClick){
 				play[Man].setVisible(false);
 
-				//Ê±¼ä¿ØÖÆ
+				//æ—¶é—´æ§åˆ¶
 				try{
 					tmain.sleep(200);
 				}
@@ -256,95 +256,111 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 
 	
 	/**
-	** µ¥»÷Æå×Ó·½·¨,Íê³ÉÒÆ¶¯Æå×Ó£¬³ÔÆå×ÓµÈÂß¼­
+	** å•å‡»æ£‹å­æ–¹æ³•,å®Œæˆç§»åŠ¨æ£‹å­ï¼Œåƒæ£‹å­ç­‰é€»è¾‘
 	*/
 	@Override
 	public void mouseClicked(MouseEvent me) {
-		//µ±Ç°×ø±ê
+		//å½“å‰åæ ‡
 		int Ex=0,Ey=0;
 				
-		//Æô¶¯Ïß³Ì
+		//å¯åŠ¨çº¿ç¨‹
 		if (tmain == null){
 			tmain = new Thread(this);
 			tmain.start();
 		}
 		
-		//µã»÷ÆåÅÌÒÆ¶¯Æå×Ó
+		//ç‚¹å‡»æ£‹ç›˜ç§»åŠ¨æ£‹å­
 		if (me.getSource().equals(image)){
-			//¸ÃºìÆå×ßÆåµÄÊ±ºò
+			//è¯¥çº¢æ£‹èµ°æ£‹çš„æ—¶å€™
 			if (chessPlayClick == 2 && play[Man].getName().charAt(1) == '2'){	
 				Ex = play[Man].getX();
 				Ey = play[Man].getY();
-				//ÒÆ¶¯×ä¡¢±ø
+				//ç§»åŠ¨å’ã€å…µ
 				if (Man > 15 && Man < 26){
 					rule.armsRule(Man,play[Man],me);
 				}
-				//ºìÆå×ßÍêºóºÚÆå×ß
+				//ç§»åŠ¨ç‚®
+				else if (Man > 25 && Man < 30){			
+					rule.cannonRule(play[Man],play,me);
+				}
+                                //ç§»åŠ¨è½¦
+				else if (Man >=0 && Man < 4){
+					rule.cannonRule(play[Man],play,me);
+				}
+				//çº¢æ£‹èµ°å®Œåé»‘æ£‹èµ°
 				chessPlayClick = 1;
 			}
-			//¸ÃºÚÆå×ßÆåµÄÊ±ºò
+			//è¯¥é»‘æ£‹èµ°æ£‹çš„æ—¶å€™
 			else if (chessPlayClick == 1 && play[Man].getName().charAt(1) == '1'){
 				Ex = play[Man].getX();
 				Ey = play[Man].getY();
-				//ÒÆ¶¯×ä¡¢±ø
+				//ç§»åŠ¨å’ã€å…µ
 				if (Man > 15 && Man < 26){
 					rule.armsRule(Man,play[Man],me);
 				}
-				//ºÚÆå×ßÍêºóºìÆå×ß
+				//ç§»åŠ¨ç‚®
+				else if (Man > 25 && Man < 30){			
+					rule.cannonRule(play[Man],play,me);
+				}
+                                //ç§»åŠ¨è½¦
+				else if (Man >=0 && Man < 4){
+					rule.cannonRule(play[Man],play,me);
+				}
+				//é»‘æ£‹èµ°å®Œåçº¢æ£‹èµ°
 				chessPlayClick = 2;
 			}
-			//µ±Ç°Ã»ÓĞ²Ù×÷(Í£Ö¹ÉÁË¸)
+			//å½“å‰æ²¡æœ‰æ“ä½œ(åœæ­¢é—ªçƒ)
 			chessManClick=false;
 		}
 		
-		//µã»÷Æå×Ó
+		//ç‚¹å‡»æ£‹å­
 		else{
-			//µÚÒ»´Îµ¥»÷Æå×Ó(ÉÁË¸Æå×Ó)
+			//ç¬¬ä¸€æ¬¡å•å‡»æ£‹å­(é—ªçƒæ£‹å­)
 			if (!chessManClick){
 				for (int i=0;i<32;i++){
-					//±»µ¥»÷µÄÆå×Ó
+					//è¢«å•å‡»çš„æ£‹å­
 					if (me.getSource().equals(play[i])){
-						//¸æËßÏß³ÌÈÃ¸ÃÆå×ÓÉÁË¸
+						//å‘Šè¯‰çº¿ç¨‹è®©è¯¥æ£‹å­é—ªçƒ
 						Man=i;
-						//¿ªÊ¼ÉÁË¸
+						//å¼€å§‹é—ªçƒ
 						chessManClick=true;
 						break;
 					}//if
 				}//for
 			}//if
 			
-			//µÚ¶ş´Îµ¥»÷Æå×Ó(µ¥»÷Òª³ÔµôµÄÆå×Ó)
+			//ç¬¬äºŒæ¬¡å•å‡»æ£‹å­(å•å‡»è¦åƒæ‰çš„æ£‹å­)
 			else if (chessManClick){
-				//µ±Ç°Ã»ÓĞ²Ù×÷(Í£Ö¹ÉÁË¸)
+				//å½“å‰æ²¡æœ‰æ“ä½œ(åœæ­¢é—ªçƒ)
 				chessManClick=false;
 				
 				for (i=0;i<32;i++){
-					//ÕÒµ½±»³ÔµÄÆå×Ó
+					//æ‰¾åˆ°è¢«åƒçš„æ£‹å­
 					if (me.getSource().equals(play[i])){
-						//¸ÃºìÆå³ÔÆåµÄÊ±ºò
+						//è¯¥çº¢æ£‹åƒæ£‹çš„æ—¶å€™
 						if (chessPlayClick == 2 && play[Man].getName().charAt(1) == '2'){
 							Ex = play[Man].getX();
 							Ey = play[Man].getY();
 							
-							//×ä¡¢±ø³Ô¹æÔò
+							//å’ã€å…µåƒè§„åˆ™
 							if (Man > 15 && Man < 26){
 								rule.armsRule(play[Man],play[i]);
 							}
-							//ºìÆå³ÔÍêºÚÆåºóÓÉºÚÆå×ßÆå
+							//çº¢æ£‹åƒå®Œé»‘æ£‹åç”±é»‘æ£‹èµ°æ£‹
 							chessPlayClick=1;
 							break;
 						}
 						
-						//¸ÃºÚÆå³ÔÆåµÄÊ±ºò
+						//è¯¥é»‘æ£‹åƒæ£‹çš„æ—¶å€™
 						else if (chessPlayClick == 1 && play[Man].getName().charAt(1) == '1'){
 							Ex = play[Man].getX();
 							Ey = play[Man].getY();
 													
-							//×ä³Ô¹æÔò
+							//å’åƒè§„åˆ™
 							if (Man > 15 && Man < 26){
 								rule.armsRule(play[Man],play[i]);
 							}
-							//ºÚÆå³ÔÍêºìÆåºóÓÉºìÆå×ßÆå
+							//é»‘æ£‹åƒå®Œçº¢æ£‹åç”±çº¢æ£‹èµ°æ£‹
 							chessPlayClick=2;
 							break;
 						}
