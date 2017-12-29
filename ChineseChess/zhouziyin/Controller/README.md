@@ -1,0 +1,2 @@
+Controller类
+控制游戏规则
