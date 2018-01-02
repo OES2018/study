@@ -181,4 +181,73 @@ public class ChessRule {
 			}//for
 		}//else if
 	}//炮，车移动规则结束
+
+	/**炮、车吃棋规则*/
+	//play是炮或车，playTake是被吃的棋子
+	public void cannonRule(int Chess,JLabel play,JLabel playTake,JLabel playQ[],MouseEvent me){
+		//起点和终点之间是否有棋子
+		int Count = 0;
+		
+		//先判断炮或车与被吃棋子之间是否有棋子
+		//所有的棋子
+		for(int j=0;j<32;j++){
+			//找出在同一条竖线的所有棋子，并不包括自己
+			if(playQ[j].getX() - play.getX() >= -27 && playQ[j].getX() - play.getX() <= 27 && playQ[j].getName()!=play.getName() && playQ[j].isVisible()){
+				
+				//自己是起点被吃的是终点(从上到下)
+				for (int k=play.getY()+57;k<playTake.getY();k+=57){
+					//大于起点、小于终点的坐标就可以知道中间是否有棋子
+					if (playQ[j].getY() < playTake.getY() && playQ[j].getY() > play.getY()){
+							//计算起点和终点的棋子个数
+							Count++;			
+							break;							
+					}
+				}//for
+				
+				//自己是起点被吃的是终点(从下到上)
+				for (int k=playTake.getY();k<play.getY();k+=57){
+					//找起点和终点的棋子
+					if (playQ[j].getY() < play.getY() && playQ[j].getY() > playTake.getY()){
+							Count++;	
+							break;
+					}
+				}//for
+			}//if
+			
+			//找出在同一条横线的所有棋子、并不包括自己
+			else if (playQ[j].getY() - play.getY() >= -10 && playQ[j].getY() - play.getY() <= 10 && playQ[j].getName()!=play.getName() && playQ[j].isVisible()){
+				//自己是起点被吃的是终点(从左到右)
+				for (int k=play.getX()+50;k<playTake.getX();k+=57){
+					//大于起点、小于终点的坐标就可以知道中间是否有棋子						
+					if (playQ[j].getX() < playTake.getX() && playQ[j].getX() > play.getX()){
+						Count++;			
+						break;	
+					}
+				}//for
+							
+				//自己是起点被吃的是终点(从右到左)
+				for (int k=playTake.getX();k<play.getX();k+=57){
+					//找起点和终点的棋子
+					if (playQ[j].getX() < play.getX() && playQ[j].getX() > playTake.getX()){
+							Count++;
+							break;
+					}
+				}//for
+			}//else if
+			
+		}//for
+		
+		//起点和终点之间要是有一个棋子是炮的规则、并不能吃自己的棋子
+		if (Count == 1 && Chess == 0 && playTake.getName().charAt(1) != play.getName().charAt(1)){
+			playTake.setVisible(false);
+			play.setBounds(playTake.getX(),playTake.getY(),55,55);
+		}
+		
+		//起点和终点之间没有棋子是车的规则、并不能吃自己的棋子	
+		else if (Count ==0  && Chess == 1 && playTake.getName().charAt(1) != play.getName().charAt(1)){
+			playTake.setVisible(false);
+			play.setBounds(playTake.getX(),playTake.getY(),55,55);
+		}
+	}//炮车吃棋方法结束
+
 }

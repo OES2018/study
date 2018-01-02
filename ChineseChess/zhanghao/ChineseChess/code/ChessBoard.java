@@ -302,7 +302,7 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 				else if (Man > 25 && Man < 30){			
 					rule.cannonRule(play[Man],play,me);
 				}
-                                //移动车
+                //移动车
 				else if (Man >=0 && Man < 4){
 					rule.cannonRule(play[Man],play,me);
 				}
@@ -346,6 +346,16 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 							if (Man > 15 && Man < 26){
 								rule.armsRule(play[Man],play[i]);
 							}
+
+							//炮吃规则
+							else if (Man > 25 && Man < 30){
+								rule.cannonRule(0,play[Man],play[i],play,me);
+							}
+							
+							//车吃规则
+							else if (Man >=0 && Man < 4){
+								rule.cannonRule(1,play[Man],play[i],play,me);
+							}
 							//红棋吃完黑棋后由黑棋走棋
 							chessPlayClick=1;
 							break;
@@ -359,6 +369,16 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 							//卒吃规则
 							if (Man > 15 && Man < 26){
 								rule.armsRule(play[Man],play[i]);
+							}
+
+						    //炮吃规则
+							else if (Man > 25 && Man < 30){
+								rule.cannonRule(0,play[Man],play[i],play,me);
+							}
+							
+							//车吃规则
+							else if (Man >=0 && Man < 4){
+								rule.cannonRule(1,play[Man],play[i],play,me);
 							}
 							//黑棋吃完红棋后由红棋走棋
 							chessPlayClick=2;
