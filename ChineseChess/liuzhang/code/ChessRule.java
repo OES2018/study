@@ -648,4 +648,749 @@ public class ChessRule {
 			} 
 		}
 	}
+	
+	//相走起规则
+	public void ministerMoveRule(JLabel chess, JLabel [] chesses, MouseEvent me ){
+		//判断移动是否有障碍
+		boolean flag = false;
+		//需要两个坐标来确定棋子移动的位置
+		int x = 0;
+		int y = 0;
+		//从方向上来看相的移动分为四种：上左、上右、下左，下右
+		//第一种：上左
+		if(chess.getX() - me.getX() >= 59 
+				&&chess.getX() - me.getX() <= 114
+				&&chess.getY() - me.getY() >= 87
+				&&chess.getY() - me.getY() <= 141){
+			//遍历查找指定位置的x坐标
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//遍历查找指定位置的y坐标
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//判断左前是否有障碍
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess.getX() - chesses[i].getX() == 57 
+						&&chess.getY() - chesses[i].getY() == 57){
+					flag = true;
+					break;
+				}
+			}
+			//红旗和黑棋都不能过河，所以移动是要注意判断位置
+			if(flag == false && y >= 341
+					&&chess.getName().charAt(0) == '红'){
+				chess.setBounds(x, y, 55,55);
+			}
+			else if(flag == false && y <= 284
+					&&chess.getName().charAt(0) == '黑'){
+				chess.setBounds(x, y, 55,55);
+			}
+		}
+		//第二种：上右
+		else if(me.getX() - chess.getX() >= 114
+				&&me.getX() - chess.getX() <= 169
+				&&chess.getY() - me.getY() >= 87
+				&&chess.getY() - me.getY() <= 141){
+			//遍历查找指定位置的x坐标
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//遍历查找指定位置的y坐标
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//判断右前是否有障碍
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess.getX() - chesses[i].getX() == -57 
+						&&chess.getY() - chesses[i].getY() == 57){
+					flag = true;
+					break;
+				}
+			}
+			//红旗和黑棋都不能过河，所以移动是要注意判断位置
+			if(flag == false && y >= 341
+					&&chess.getName().charAt(0) == '红'){
+				chess.setBounds(x, y, 55,55);
+			}
+			else if(flag == false && y <= 284
+					&&chess.getName().charAt(0) == '黑'){
+				chess.setBounds(x, y, 55,55);
+			}
+		}
+		//第三种：下左
+		else if(chess.getX() - me.getX() >= 59 
+				&&chess.getX() - me.getX() <= 114
+				&&me.getY() - chess.getY() >= -87
+				&&me.getY() - chess.getY() <= 141){
+			//遍历查找指定位置的x坐标
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//遍历查找指定位置的y坐标
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//判断左下是否有障碍
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess.getX() - chesses[i].getX() == 57 
+						&&chess.getY() - chesses[i].getY() == -57){
+					flag = true;
+					break;
+				}
+			}
+			//红旗和黑棋都不能过河，所以移动是要注意判断位置
+			if(flag == false && y >= 341
+					&&chess.getName().charAt(0) == '红'){
+				chess.setBounds(x, y, 55,55);
+			}
+			else if(flag == false && y <= 284
+					&&chess.getName().charAt(0) == '黑'){
+				chess.setBounds(x, y, 55,55);
+			}
+		}
+		//第四种：下右
+		else if(me.getX() - chess.getX() >= 114
+				&&me.getX() - chess.getX() <= 169
+				&&me.getY() - chess.getY() >= 87
+				&&me.getY() - chess.getY() <= 141){
+			//遍历查找指定位置的x坐标
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//遍历查找指定位置的y坐标
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//判断右下是否有障碍
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess.getX() - chesses[i].getX() == -57 
+						&&chess.getY() - chesses[i].getY() == -57){
+					flag = true;
+					break;
+				}
+			}
+			//红旗和黑棋都不能过河，所以移动是要注意判断位置
+			if(flag == false && y >= 341
+					&&chess.getName().charAt(0) == '红'){
+				chess.setBounds(x, y, 55,55);
+			}
+			else if(flag == false && y <= 284
+					&&chess.getName().charAt(0) == '黑'){
+				chess.setBounds(x, y, 55,55);
+			}
+		}
+	}
+	//相吃棋子规则，也是四种方向吃棋子：上左、上右、下左，下右
+	public void ministerKillRule(JLabel chess1, JLabel chess2, JLabel[] chesses){
+		//判断是否有障碍
+		boolean flag = false;
+		//上左吃棋子
+		if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
+				&&chess1.getX() - chess2.getX() == 114
+				&&chess1.getY() - chess2.getY() ==114){
+			//判断左前是否有障碍
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess1.getX() - chesses[i].getX() == 57 
+						&&chess1.getY() - chesses[i].getY() == 57){
+					flag = true;
+					break;
+				}
+			}
+			//红相吃黑棋
+			if(flag == false && chess2.getY() >= 341
+					&&chess1.getName().charAt(0) == '红'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//黑相吃红棋
+			else if(flag == false && chess2.getY() <= 284
+					&&chess1.getName().charAt(0) == '黑'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//第二种：上右吃棋子
+		else if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
+				&&chess2.getX() - chess1.getX() == 114
+				&&chess1.getY() - chess2.getY() ==114){
+			//判断右前是否有障碍
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess1.getX() - chesses[i].getX() == -57 
+						&&chess1.getY() - chesses[i].getY() == 57){
+					flag = true;
+					break;
+				}
+			}
+			//红相吃黑棋
+			if(flag == false && chess2.getY() >= 341
+					&&chess1.getName().charAt(0) == '红'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//黑相吃红棋
+			else if(flag == false && chess2.getY() <= 284
+					&&chess1.getName().charAt(0) == '黑'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//第三种：下左吃棋子
+		else if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
+				&&chess1.getX() - chess2.getX() == 114
+				&&chess2.getY() - chess1.getY() ==114){
+			//判断左下是否有障碍
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess1.getX() - chesses[i].getX() == 57 
+						&&chess1.getY() - chesses[i].getY() == -57){
+					flag = true;
+					break;
+				}
+			}
+			//红相吃黑棋
+			if(flag == false && chess2.getY() >= 341
+					&&chess1.getName().charAt(0) == '红'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//黑相吃红棋
+			else if(flag == false && chess2.getY() <= 284
+					&&chess1.getName().charAt(0) == '黑'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//第四种：下右吃棋子
+		else if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
+				&&chess2.getX() - chess1.getX() == 114
+				&&chess2.getY() - chess1.getY() ==114){
+			//判断右下是否有障碍
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess1.getX() - chesses[i].getX() == -57 
+						&&chess1.getY() - chesses[i].getY() == -57){
+					flag = true;
+					break;
+				}
+			}
+			//红相吃黑棋
+			if(flag == false && chess2.getY() >= 341
+					&&chess1.getName().charAt(0) == '红'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//黑相吃红棋
+			else if(flag == false && chess2.getY() <= 284
+					&&chess1.getName().charAt(0) == '黑'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+	}
+	//士的移动规则
+	public void advisorMoveRule(JLabel chess, MouseEvent me){
+		//需要两个坐标来确定位置
+		int x=0;
+		int y=0;
+		
+		//从方向上来看分为四种移动情况：上左、上右、下左，下右
+		//第一种：上左
+		if(chess.getX() - me.getX() >= 2 
+				&&chess.getX() - me.getX() <= 57
+				&&chess.getY() - me.getY() >= 30
+				&&chess.getY() - me.getY() <= 84){
+			//遍历查找指定位置的x坐标
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//遍历查找指定位置的y坐标
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//红士和黑士都不能过河且在指定区域内
+			//红士移动
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//黑士移动
+			else if(x >= 195 && x <= 309
+					&& y >= 56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+		//第二种：上右
+		else if(me.getX() - chess.getX() >= 57 
+				&&me.getX() - chess.getX() <= 112
+				&&chess.getY() - me.getY() >= 30
+				&&chess.getY() - me.getY() <= 84){
+			//遍历查找指定位置的x坐标
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//遍历查找指定位置的y坐标
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//红士和黑士都不能过河且在指定区域内
+			//红士移动
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//黑士移动
+			else if(x >= 195 && x <= 309
+					&& y >= 56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+		//第三种：下左
+		else if(chess.getX() - me.getX() >= 2 
+				&&chess.getX() - me.getX() <= 57
+				&&me.getY() - chess.getY() >= 30
+				&&me.getY() - chess.getY() <= 84){
+			//遍历查找指定位置的x坐标
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//遍历查找指定位置的y坐标
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//红士和黑士都不能过河且在指定区域内
+			//红士移动
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//黑士移动
+			else if(x >= 195 && x <= 309
+					&& y >=56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+		//第四种：下右
+		else if(me.getX() - chess.getX() >= 57 
+				&&me.getX() - chess.getX() <= 112
+				&&me.getY() - chess.getY() >= 30
+				&&me.getY() - chess.getY() <= 84){
+			//遍历查找指定位置的x坐标
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//遍历查找指定位置的y坐标
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//红士和黑士都不能过河且在指定区域内
+			//红士移动
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//黑士移动
+			else if(x >= 195 && x <= 309
+					&& y >= 56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+	}
+	//士的吃棋规则
+	//也是四个方向吃棋子：上左、上右、下左，下右
+	public void advisorKillRule(JLabel chess1, JLabel chess2){
+		//第一种：上左吃棋子
+		if(chess1.getX() - chess2.getX() == 57 
+				&&chess1.getY() -chess2.getY() == 57){
+			//红士和黑士都不能过河且在指定区域内
+			//红士移动吃黑棋
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == '红'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//黑士移动吃红旗
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >=56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == '黑'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//上右吃棋子
+		else if(chess2.getX() - chess1.getX() == 57 
+				&&chess1.getY() -chess2.getY() == 57){
+			//红士和黑士都不能过河且在指定区域内
+			//红士移动吃黑棋
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == '红'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//黑士移动吃红旗
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == '黑'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//下左吃棋子
+		else if(chess1.getX() - chess2.getX() == 57 
+				&&chess2.getY() -chess1.getY() == 57){
+			//红士和黑士都不能过河且在指定区域内
+			//红士移动吃黑棋
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == '红'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//黑士移动吃红旗
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == '黑'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//下右吃棋子
+		else if(chess2.getX() - chess1.getX() == 57 
+				&&chess2.getY() -chess1.getY() == 57){
+			//红士和黑士都不能过河且在指定区域内
+			//红士移动吃黑棋
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == '红'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//黑士移动吃红旗
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == '黑'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+	}
+	//将、帅移动规则
+	public void kingMoveRule(JLabel chess, MouseEvent me){
+		//需要两个坐标确定移动位置
+		int x=0;
+		int y=0;
+		//将、帅移动方向也是四种：上、下、左、右 
+		//第一种：上
+		if(chess.getX() - me.getX() >= -55 
+				&&chess.getX() - me.getX() <= 0
+				&&chess.getY() - me.getY() >= 30
+				&&chess.getY() - me.getY() <= 84){
+			//遍历查找指定位置的x坐标
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//遍历查找指定位置的y坐标
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//红帅和黑将都不能过河且在指定区域内
+			//红帅移动
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//黑将移动
+			else if(x >= 195 && x <= 309
+					&& y >= 56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+		//第二种：下
+		else if(chess.getX() - me.getX() >= -55 
+				&&chess.getX() - me.getX() <= 0
+				&&me.getY() - chess.getY() >= 30
+				&&me.getY() - chess.getY() <= 84){
+			//遍历查找指定位置的x坐标
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//遍历查找指定位置的y坐标
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//红帅和黑将都不能过河且在指定区域内
+			//红帅移动
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//黑将移动
+			else if(x >= 195 && x <= 309
+					&& y>=56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+		//第三种：左
+		else if(chess.getX() - me.getX() >= 2
+				&&chess.getX() - me.getX() <= 57
+				&&me.getY() - chess.getY() >= -27
+				&&me.getY() - chess.getY() <= 27){
+			//遍历查找指定位置的x坐标
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//遍历查找指定位置的y坐标
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//红帅和黑将都不能过河且在指定区域内
+			//红帅移动
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//黑将移动
+			else if(x >= 195 && x <= 309
+					&& y>=56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+		//第四种：右
+		else if(me.getX() - chess.getX() >= 57 
+				&&me.getX() - chess.getX() <= 112
+				&&me.getY() - chess.getY() >= -27
+				&&me.getY() - chess.getY() <= 27){
+			//遍历查找指定位置的x坐标
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//遍历查找指定位置的y坐标
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//红帅和黑将都不能过河且在指定区域内
+			//红帅移动
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//黑将移动
+			else if(x >= 195 && x <= 309
+					&& y>=56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+	}
+	//将、帅吃棋子规则
+	public void kingMoveRule(JLabel chess1, JLabel chess2, JLabel[] chesses){
+		//判断帅和将是否可以直接吃对方
+		boolean flag = true;
+		//将、帅吃棋也是六种：上、下、左、右、帅上吃将、将下吃帅。
+		//要尤其注意帅和将直接面对时的情况，
+		//上
+		if(chess1.getX() == chess2.getX() 
+				&& chess1.getY() -chess2.getY() == 57){
+			//红帅吃黑棋
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == '红'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//黑将吃红棋
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == '黑'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//下
+		else if(chess1.getX() == chess2.getX() 
+				&& chess2.getY() -chess1.getY() == 57){
+			//红帅吃黑棋
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == '红'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//黑将吃红棋
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == '黑'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//左
+		else if(chess1.getX() - chess2.getX() == 57
+				&& chess1.getY() == chess2.getY()){
+			//红帅吃黑棋
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == '红'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//黑将吃红棋
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == '黑'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//右
+		else if(chess2.getX() - chess1.getX() == 57
+				&& chess1.getY() == chess2.getY()){
+			//红帅吃黑棋
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == '红'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//黑将吃红棋
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == '黑'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//帅上吃将
+		else if(chess1.getName().charAt(1) == '帅' 
+				&& chess2.getName().charAt(1) == '将'
+				&& chess1.getX() == chess2.getX()){
+			for(int i=0; i<32; i++){
+				if(chesses[i].getX() == chess1.getX()){
+					flag = false;
+				}
+			}
+			if(flag){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//将下吃棋
+		else if(chess1.getName().charAt(1) == '将' 
+				&& chess2.getName().charAt(1) == '帅'
+				&& chess1.getX() == chess2.getX()){
+			for(int i=0; i<32; i++){
+				if(chesses[i].getX() == chess1.getX()){
+					flag = false;
+				}
+			}
+			if(flag){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+	}
 }
