@@ -283,12 +283,34 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 				else if (Man > 25 && Man < 30){			
 					rule.cannonRule(play[Man],play,me);
 				}
-                                //移动车
+                //移动车
 				else if (Man >=0 && Man < 4){
 					rule.cannonRule(play[Man],play,me);
 				}
+				//移动马
+				else if (Man > 3 && Man < 8){
+					rule.horseRule(play[Man],play,me);
+				}
+				//移动相、象
+				else if (Man > 7 && Man < 12){
+					rule.elephantRule(Man,play[Man],play,me);
+				}
+				//移动仕、士
+				else if (Man > 11 && Man < 16){
+					rule.chapRule(Man,play[Man],play,me);
+				}
+				//移动将、帅
+				else if (Man == 30 || Man == 31){				
+					rule.willRule(Man,play[Man],play,me);
+				}
+				//是否走棋错误(是否在原地没有动)
+				if (Ex == play[Man].getX() && Ey == play[Man].getY()){
+					chessPlayClick=2;
+				}
 				//红棋走完后黑棋走
-				chessPlayClick = 1;
+				else{
+					chessPlayClick = 1;
+				}
 			}
 			//该黑棋走棋的时候
 			else if (chessPlayClick == 1 && play[Man].getName().charAt(1) == '1'){
@@ -306,8 +328,30 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 				else if (Man >=0 && Man < 4){
 					rule.cannonRule(play[Man],play,me);
 				}
+                //移动马
+				else if (Man > 3 && Man < 8){
+					rule.horseRule(play[Man],play,me);
+				}
+				//移动相、象
+				else if (Man > 7 && Man < 12){
+					rule.elephantRule(Man,play[Man],play,me);
+				}
+				//移动仕、士
+				else if (Man > 11 && Man < 16){
+					rule.chapRule(Man,play[Man],play,me);
+				}
+				//移动将、帅
+				else if (Man == 30 || Man == 31){
+					rule.willRule(Man,play[Man],play,me);
+				}
+                //是否走棋错误(是否在原地没有动)
+				if (Ex == play[Man].getX() && Ey == play[Man].getY()){
+					chessPlayClick=1;
+				}
 				//黑棋走完后红棋走
-				chessPlayClick = 2;
+				else{
+					chessPlayClick = 2;
+				}
 			}
 			//当前没有操作(停止闪烁)
 			chessManClick=false;
@@ -356,9 +400,39 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 							else if (Man >=0 && Man < 4){
 								rule.cannonRule(1,play[Man],play[i],play,me);
 							}
+		
+							//马吃规则
+							else if (Man > 3 && Man < 8){
+								rule.horseRule(play[Man],play[i],play,me);	
+							}
+							
+							//相、象吃规则
+							else if (Man > 7 && Man < 12){
+								rule.elephantRule(play[Man],play[i],play);
+							}
+							
+							//士、仕吃棋规则
+							else if (Man > 11 && Man < 16){
+								rule.chapRule(Man,play[Man],play[i],play);
+							}
+							
+							//将、帅吃棋规则
+							else if (Man == 30 || Man == 31){
+								rule.willRule(Man,play[Man],play[i],play);
+								play[Man].setVisible(true);	
+							}
+
+							//是否走棋错误(是否在原地没有动)
+							if (Ex == play[Man].getX() && Ey == play[Man].getY()){
+								chessPlayClick=2;
+								break;
+							}
+
 							//红棋吃完黑棋后由黑棋走棋
-							chessPlayClick=1;
-							break;
+							else{
+								chessPlayClick=1;
+								break;
+							}
 						}
 						
 						//该黑棋吃棋的时候
@@ -380,9 +454,39 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 							else if (Man >=0 && Man < 4){
 								rule.cannonRule(1,play[Man],play[i],play,me);
 							}
+
+							//马吃规则
+							else if (Man > 3 && Man < 8){
+								rule.horseRule(play[Man],play[i],play,me);
+							}
+							
+							//相、象吃规则
+							else if (Man > 7 && Man < 12){
+								rule.elephantRule(play[Man],play[i],play);
+							}
+							
+							//士、仕吃棋规则
+							else if (Man > 11 && Man < 16){
+								rule.chapRule(Man,play[Man],play[i],play);
+							}
+							
+							//将、帅吃棋规则
+							else if (Man == 30 || Man == 31){
+								rule.willRule(Man,play[Man],play[i],play);
+								play[Man].setVisible(true);			
+							}
+							
+							//是否走棋错误(是否在原地没有动)
+							if (Ex == play[Man].getX() && Ey == play[Man].getY()){
+								chessPlayClick=1;
+								break;
+							}
+
 							//黑棋吃完红棋后由红棋走棋
-							chessPlayClick=2;
-							break;
+							else{
+								chessPlayClick=2;
+								break;
+							}
 						}
 					}//if
 				}//for
