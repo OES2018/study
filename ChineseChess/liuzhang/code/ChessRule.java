@@ -5,25 +5,25 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 
 /**
- ** ¶¨ÒåËùÓĞÆå×ÓµÄÒÆ¶¯ºÍ³ÔÆå×Ó¹æÔò
+ ** å®šä¹‰æ‰€æœ‰æ£‹å­çš„ç§»åŠ¨å’Œåƒæ£‹å­è§„åˆ™
  */
 public class ChessRule {
-	//ºÚ×ä¡¢ºì±øÒÆ¶¯¹æÔò,¸ù¾İÊµ¼ÊÒÆ¶¯µÄÏñËØ¾àÀëµÄ·¶Î§È·¶¨ÒÆ¶¯µ½µÄµã
+	//é»‘å’ã€çº¢å…µç§»åŠ¨è§„åˆ™,æ ¹æ®å®é™…ç§»åŠ¨çš„åƒç´ è·ç¦»çš„èŒƒå›´ç¡®å®šç§»åŠ¨åˆ°çš„ç‚¹
 	public void soldiesMoveRule(int i,JLabel chess,MouseEvent me){
-		//ºÚ×ä
+		//é»‘å’
 		if(i>10 && i<16){
-			//ÏòÏÂ
+			//å‘ä¸‹
 			if((me.getY()-chess.getY()) > 27 
 					&& (me.getY()-chess.getY()) < 84
 					&& (me.getX()-chess.getX()) < 55 
 					&& (me.getX()-chess.getX() > 0)){
 				chess.setBounds(chess.getX(),chess.getY()+57,55,55);
-			}//ºÚ×äÏòÓÒ£¬±ØĞë¹ıºÓ
+			}//é»‘å’å‘å³ï¼Œå¿…é¡»è¿‡æ²³
 			else if(chess.getY()>284 
 					&& (me.getX()-chess.getX()) >= 57 
 					&&(me.getX()-chess.getY()) <= 112){
 				chess.setBounds(chess.getX()+57, chess.getY(), 55, 55);
-			}//ºÚ×äÏò×ó£¬±ØĞë¹ıºÓ
+			}//é»‘å’å‘å·¦ï¼Œå¿…é¡»è¿‡æ²³
 			else if(chess.getY()>284 
 					&& (chess.getX()-me.getX()) >= 2 
 					&& (chess.getX()-me.getX()) <= 58){
@@ -31,20 +31,20 @@ public class ChessRule {
 			}
 		}
 		
-		//ºì±ø
+		//çº¢å…µ
 		else if(i>26 && i<32){
-			//ÏòÉÏ
+			//å‘ä¸Š
 			if((chess.getY()-me.getY())>27 
 					&& (chess.getY()-me.getY()) < 84 
 					&& (me.getX()-chess.getX()) >= 0 
 					&& (me.getX()-chess.getX()) <= 55 ){
 				chess.setBounds(chess.getX(), chess.getY()-57, 55, 55);
-			}//ºì±øÏòÓÒ£¬±ØĞë¹ıºÓ
+			}//çº¢å…µå‘å³ï¼Œå¿…é¡»è¿‡æ²³
 			else if(chess.getY()<341 
 					&& (me.getX()-chess.getX()) >= 57 
 					&&(me.getX()-chess.getY()) <= 112){
 				chess.setBounds(chess.getX()+57, chess.getY(), 55, 55);
-			}//ºì±øÏò×ó£¬±ØĞë¹ıºÓ
+			}//çº¢å…µå‘å·¦ï¼Œå¿…é¡»è¿‡æ²³
 			else if(chess.getY()<341 
 					&& (chess.getX()-me.getX()) >= 2 
 					&& (chess.getX()-me.getX()) <= 58){
@@ -53,67 +53,67 @@ public class ChessRule {
 		}	
 	}
 	
-	///ºÚ×ä¡¢ºì±ø³Ô¹æÔò
+	///é»‘å’ã€çº¢å…µåƒè§„åˆ™
 	public void soldiesKillRule(JLabel chess1, JLabel chess2){
-		//ÏòÓÒ³ÔÆå
+		//å‘å³åƒæ£‹
 		if ((chess2.getX()-chess1.getX()) <= 112 
 				&& (chess2.getX()-chess1.getX()) >= 57 
 				&& (chess1.getY() - chess2.getY()) < 22 
 				&& (chess1.getY() - chess2.getY()) > -22 
 				&& chess2.isVisible() 
 				&& chess1.getName().charAt(0)!=chess2.getName().charAt(0)){
-			//ºÚÆå¹ıºÓÏòÓÒ³ÔÆå
-			if (chess1.getName().charAt(0) == 'ºÚ' 
+			//é»‘æ£‹è¿‡æ²³å‘å³åƒæ£‹
+			if (chess1.getName().charAt(0) == 'é»‘' 
 					&& chess1.getY() > 284 
 					&& chess1.getName().charAt(0)!=chess2.getName().charAt(0)){
-				//ÊÇ±»³ÔµÄÆå×Ó¡°ÏûÊ§¡±£¬ÈÃºóÈÃ³ÔÆåµÄÆå·Åµ½±»³ÔµÄÆå×ÓµÄÎ»ÖÃ
+				//æ˜¯è¢«åƒçš„æ£‹å­â€œæ¶ˆå¤±â€ï¼Œè®©åè®©åƒæ£‹çš„æ£‹æ”¾åˆ°è¢«åƒçš„æ£‹å­çš„ä½ç½®
 				chess2.setVisible(false);
 				chess1.setBounds(chess2.getX(),chess2.getY(),55,55);
-			}//ºìÆå¹ıºÓÏòÓÒ³ÔºÚÆå
-			else if (chess1.getName().charAt(0) == 'ºì' 
+			}//çº¢æ£‹è¿‡æ²³å‘å³åƒé»‘æ£‹
+			else if (chess1.getName().charAt(0) == 'çº¢' 
 					&& chess1.getY() < 341 
 					&& chess1.getName().charAt(0) != chess2.getName().charAt(0)){
 				chess2.setVisible(false);
 				chess1.setBounds(chess2.getX(),chess2.getY(),55,55);				
 			}
 		}
-		//Ïò×ó³ÔÆå×Ó
+		//å‘å·¦åƒæ£‹å­
 		else if ((chess1.getX()-chess2.getX()) <= 112 
 				&& (chess1.getX()-chess2.getX()) >= 57 
 				&& (chess1.getY()-chess2.getY()) < 22 
 				&& (chess1.getY()-chess2.getY()) > -22 
 				&& chess2.isVisible() && chess1.getName().charAt(0)!=chess2.getName().charAt(0)){
-			//ºÚÆåÒª¹ıºÓ²ÅÄÜ×ó³ÔºìÆå
-			if (chess1.getName().charAt(1) == 'ºÚ' 
+			//é»‘æ£‹è¦è¿‡æ²³æ‰èƒ½å·¦åƒçº¢æ£‹
+			if (chess1.getName().charAt(1) == 'é»‘' 
 					&& chess1.getY() > 284 
 					&& chess1.getName().charAt(0) != chess2.getName().charAt(0)){
 				chess2.setVisible(false);
 				chess1.setBounds(chess2.getX(),chess2.getY(),55,55);
 			}
 			
-			//ºìÆåÒª¹ıºÓ²ÅÄÜ×ó³ÔÆå
-			else if (chess1.getName().charAt(0) == 'ºì' 
+			//çº¢æ£‹è¦è¿‡æ²³æ‰èƒ½å·¦åƒæ£‹
+			else if (chess1.getName().charAt(0) == 'çº¢' 
 					&& chess1.getY() < 341 
 					&& chess1.getName().charAt(0) != chess2.getName().charAt(0)){
 				chess2.setVisible(false);
 				chess1.setBounds(chess2.getX(),chess2.getY(),55,55);				
 			}
 		}
-		//ºÚÆåÏòÏÂ³ÔºìÆå£¬ºìÆåÏòÉÏ³ÔºÚÆå
+		//é»‘æ£‹å‘ä¸‹åƒçº¢æ£‹ï¼Œçº¢æ£‹å‘ä¸Šåƒé»‘æ£‹
 		else if (chess1.getX() - chess2.getX() >= -22 
 				&& chess1.getX() - chess2.getX() <= 22 
 				&& chess1.getY() - chess2.getY() >= -112 
 				&& chess1.getY() - chess2.getY() <= 112){
-			//ºÚÆåÏòÏÂ³ÔºìÆå
-			if (chess1.getName().charAt(1) == 'ºÚ' 
+			//é»‘æ£‹å‘ä¸‹åƒçº¢æ£‹
+			if (chess1.getName().charAt(1) == 'é»‘' 
 					&& chess1.getY() < chess2.getY() 
 					&& chess1.getName().charAt(0) != chess2.getName().charAt(0)){
 				chess2.setVisible(false);
 				chess1.setBounds(chess2.getX(),chess2.getY(),55,55);
 			}
 			
-			//ºìÆåÏòÉÏ³ÔºÚÆå
-			else if (chess1.getName().charAt(1) == 'ºì' 
+			//çº¢æ£‹å‘ä¸Šåƒé»‘æ£‹
+			else if (chess1.getName().charAt(1) == 'çº¢' 
 					&& chess1.getY() > chess2.getY() 
 					&& chess1.getName().charAt(0) != chess2.getName().charAt(0)){
 				chess2.setVisible(false);
@@ -122,31 +122,31 @@ public class ChessRule {
 		}
 	}
 	
-	//ÅÚ¡¢³µÒÆ¶¯¹æÔò£¬ÕâÁ½ÀàÆå×ÓµÄÒÆ¶¯¹æÔòÒ»Ñù
+	//ç‚®ã€è½¦ç§»åŠ¨è§„åˆ™ï¼Œè¿™ä¸¤ç±»æ£‹å­çš„ç§»åŠ¨è§„åˆ™ä¸€æ ·
 	public void cannonAndRookMoveRule(JLabel chess, JLabel[] chesses, MouseEvent me){
-		//¼ÆËãÆğµãºÍÖÕµãµÄÆäËûÆå×ÓÊıÁ¿,
+		//è®¡ç®—èµ·ç‚¹å’Œç»ˆç‚¹çš„å…¶ä»–æ£‹å­æ•°é‡,
 		int county = 0;
 		int countx = 0;
 		int iy;
 		int ix;
 		
-		//ÅÚ¡¢³µµÄÉÏÏÂÒÆ¶¯,ÏÈÅĞ¶ÏÊÇ·ñÊÇ×óÓÒÒÆ¶¯
+		//ç‚®ã€è½¦çš„ä¸Šä¸‹ç§»åŠ¨,å…ˆåˆ¤æ–­æ˜¯å¦æ˜¯å·¦å³ç§»åŠ¨
 		if(((chess.getX() - me.getX()) <= 0 && (chess.getX() - me.getX()) >= -57)){
-			//½«ËùÓĞµÄY×ø±ê±éÀú³öÀ´
+			//å°†æ‰€æœ‰çš„Yåæ ‡éå†å‡ºæ¥
 			for(iy=56; iy<=571; iy+=57){
-				//ÅĞ¶ÏÊó±êµã»÷µÄÎ»×ÓÊÇ·ñÓëÄ³¸ö×ø±ê½Ó½ü
+				//åˆ¤æ–­é¼ æ ‡ç‚¹å‡»çš„ä½å­æ˜¯å¦ä¸æŸä¸ªåæ ‡æ¥è¿‘
 				if((iy - me.getY()) >= -27 && (iy - me.getY()) < 27){
-					//ÕÒ³öÔÚÍ¬Ò»ÌõÊúÏßÉÏ½éÓÚÆğµãºÍÖÕµãµÄµÄËùÓĞÆäËûÆå×Ó
+					//æ‰¾å‡ºåœ¨åŒä¸€æ¡ç«–çº¿ä¸Šä»‹äºèµ·ç‚¹å’Œç»ˆç‚¹çš„çš„æ‰€æœ‰å…¶ä»–æ£‹å­
 					for(int j=0; j<32; j+=1){
-						//²»ÄÜµ¥´¿¿´×ø±êÊÇ·ñÏàµÈ£¬¿ÉÄÜÔÚÒÆ¶¯µÄ¹ı³ÌÖĞ×ø±ê³öÏÖÏ¸Î¢µÄ±ä»¯£¬±¾À´ÎÒÃÇµÄ×ø±ê¾Í²»¹»¾«È·
+						//ä¸èƒ½å•çº¯çœ‹åæ ‡æ˜¯å¦ç›¸ç­‰ï¼Œå¯èƒ½åœ¨ç§»åŠ¨çš„è¿‡ç¨‹ä¸­åæ ‡å‡ºç°ç»†å¾®çš„å˜åŒ–ï¼Œæœ¬æ¥æˆ‘ä»¬çš„åæ ‡å°±ä¸å¤Ÿç²¾ç¡®
 						if((chesses[j].getX()-chess.getX()) <= 27
 								&&(chesses[j].getX()-chess.getX()) >= -27
 								&&chesses[j].getName() != chess.getName()){
-							//´ÓÉÏµ½ÏÂ
+							//ä»ä¸Šåˆ°ä¸‹
 							if((chesses[j].getY() > (chess.getY()+27))
 									&&(chesses[j].getY()< (iy-27))){
 								county++;
-							}//´ÓÏÂµ½ÉÏ
+							}//ä»ä¸‹åˆ°ä¸Š
 							else if((chesses[j].getY() > (iy+27))
 									&&(chesses[j].getY()< (chess.getY()-27))){
 								county++;
@@ -159,21 +159,21 @@ public class ChessRule {
 				chess.setBounds(chess.getX(), iy, 55, 55);
 			}
 		}
-		//ÅÚ¡¢³µµÄ×óÓÒÒÆ¶¯
+		//ç‚®ã€è½¦çš„å·¦å³ç§»åŠ¨
 		else if(((chess.getY() - me.getY()) <= 27 
 				&& (chess.getY() - me.getY()) >= -27)){
-			//±éÀú³öËùÓĞÔÚÒ»ÌõºáÏßÉÏÇÒ½éÓÚÆğµãºÍÖÕµãÖ®¼äµÄËùÓĞÆäËûÆå×Ó
+			//éå†å‡ºæ‰€æœ‰åœ¨ä¸€æ¡æ¨ªçº¿ä¸Šä¸”ä»‹äºèµ·ç‚¹å’Œç»ˆç‚¹ä¹‹é—´çš„æ‰€æœ‰å…¶ä»–æ£‹å­
 			for(ix=24; ix<=480; ix+=57){
 				if((ix - me.getX()) >= -55 && (ix-me.getX())<=0){
 					for(int j=0; j<32; j++){
 						if((chesses[j].getY()- chess.getY()) <= 27 
 								&&(chesses[j].getY()- chess.getY()) >= -27
 								&&chesses[j].getName() != chess.getName()){
-								//´Ó×óµ½ÓÒ
+								//ä»å·¦åˆ°å³
 							if(chesses[j].getX() >= (chess.getX()+57)
 									&&chesses[j].getX() < ix){
 								countx++;
-							}//´ÓÓÒµ½×ó
+							}//ä»å³åˆ°å·¦
 							else if(chesses[j].getX() >= (ix+57)
 									&&chesses[j].getX() < chess.getX()){
 								countx++;
@@ -188,34 +188,34 @@ public class ChessRule {
 		}
 	}
 	
-	//ÅÚ¡¢³µ³ÔÆå¹æÔò
+	//ç‚®ã€è½¦åƒæ£‹è§„åˆ™
 	public void cannonAndRookKillRule(JLabel chess1, JLabel chess2, JLabel[] chesses){
-		//¼ÆËãÆğµãÖÕµãÖ®¼äµÄÆäËûÆå×ÓÊıÁ¿
+		//è®¡ç®—èµ·ç‚¹ç»ˆç‚¹ä¹‹é—´çš„å…¶ä»–æ£‹å­æ•°é‡
 		int count=0;
 		
 		
 		for(int j=0; j<32; j+=1){
-			//ÕÒ³öÍ¬Ò»ÊúÏßÏÂÆäËûËùÓĞ½éÓÚÆğµãºÍÖÕµãÖ®¼äµÄÆå×Ó
+			//æ‰¾å‡ºåŒä¸€ç«–çº¿ä¸‹å…¶ä»–æ‰€æœ‰ä»‹äºèµ·ç‚¹å’Œç»ˆç‚¹ä¹‹é—´çš„æ£‹å­
 			if((chesses[j].getX() - chess1.getX()) <= 27 
 					&&(chesses[j].getX()-chess1.getX()) >= -27){
-				//´ÓÉÏÏòÏÂ
+				//ä»ä¸Šå‘ä¸‹
 				if(chesses[j].getY() > (chess1.getY()+27)
 						&&chesses[j].getY()< (chess2.getY()-27)){
 					count++;
-				}//´ÓÏÂÏòÉÏ
+				}//ä»ä¸‹å‘ä¸Š
 				else if(chesses[j].getY() > (chess2.getY()+27)
 						&&chesses[j].getY()< (chess1.getY()-27)){
 					count++;
 				}	
 			}
-			//ÕÒ³öÍ¬Ò»ºáÏßÉÏÆäËûËùÓĞ½éÓÚÆğµãºÍÖÕµãÖ®¼äµÄÆå×Ó
+			//æ‰¾å‡ºåŒä¸€æ¨ªçº¿ä¸Šå…¶ä»–æ‰€æœ‰ä»‹äºèµ·ç‚¹å’Œç»ˆç‚¹ä¹‹é—´çš„æ£‹å­
 			else if((chesses[j].getY()- chess1.getY()) <= 27 
 					&&(chesses[j].getY()- chess1.getY()) >= -27){
-					//´Ó×óµ½ÓÒ
+					//ä»å·¦åˆ°å³
 				if(chesses[j].getX() >= (chess1.getX()+57)
 						&&chesses[j].getX() < chess2.getX()){
 					count++;
-				}//´ÓÓÒµ½×ó
+				}//ä»å³åˆ°å·¦
 				else if(chesses[j].getX() >= (chess2.getX()+57)
 						&&chesses[j].getX() < chess1.getX()){
 					count++;
@@ -232,20 +232,20 @@ public class ChessRule {
 		}
 	}
 	
-	//ÂíÒÆ¶¯¹æÔò
+	//é©¬ç§»åŠ¨è§„åˆ™
 	public void horseMoveRule(JLabel chess, JLabel[] chesses, MouseEvent me){
-		//ÒÆ¶¯ÂíÊÇ·ñÓĞÕÏ°­
+		//ç§»åŠ¨é©¬æ˜¯å¦æœ‰éšœç¢
 		boolean flag = true;
-		//ĞèÒªÁ½²½²ÅÄÜÈ·¶¨ÂíÒÆ¶¯µÄÎ»ÖÃ
+		//éœ€è¦ä¸¤æ­¥æ‰èƒ½ç¡®å®šé©¬ç§»åŠ¨çš„ä½ç½®
 		int x=0;
 		int y=0;
-		//ÂíµÄÒÆ¶¯´Ó·½ÏòÉÏÀ´¿´ÓĞ°ËÖÖ£¬ÉÏ×ó¡¢ÉÏÓÒ¡¢ÏÂ×ó¡¢ÏÂÓÒ¡¢×óÉÏ¡¢×óÏÂ¡¢ÓÒÉÏ¡¢ÓÒÏÂ¡£
-		//µÚÒ»ÖÖ£ºÉÏ×ó
+		//é©¬çš„ç§»åŠ¨ä»æ–¹å‘ä¸Šæ¥çœ‹æœ‰å…«ç§ï¼Œä¸Šå·¦ã€ä¸Šå³ã€ä¸‹å·¦ã€ä¸‹å³ã€å·¦ä¸Šã€å·¦ä¸‹ã€å³ä¸Šã€å³ä¸‹ã€‚
+		//ç¬¬ä¸€ç§ï¼šä¸Šå·¦
 		if((chess.getX()-me.getX()) >=2
 				&&(chess.getX()-me.getX()) <= 57
 				&&(chess.getY()-me.getY()) >= 84
 				&&(chess.getY()-me.getY()) <= 141){
-			//ÕÒµ½¶ÔÓ¦µÄx×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„xåæ ‡
 			for(int ix=24; ix<=480; ix+=57){
 				if(ix -me.getX() >=-55
 						&&ix - me.getX() <= 0){
@@ -253,7 +253,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÕÒµ½¶ÔÓ¦µÄy×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„yåæ ‡
 			for(int iy=56; iy<571; iy+=57){
 				if((iy - me.getY())>=-27
 						&&(iy-me.getY()) <=27){
@@ -261,7 +261,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñÓĞÕÏ°­£¬¼´ÕıÉÏ·½ÊÇ·ñÓĞÆå×Ó
+			//åˆ¤æ–­æ˜¯å¦æœ‰éšœç¢ï¼Œå³æ­£ä¸Šæ–¹æ˜¯å¦æœ‰æ£‹å­
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess.getX() == chesses[i].getX()
@@ -269,16 +269,16 @@ public class ChessRule {
 					flag = false;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔÒÆ¶¯Æå×Ó
+			//åˆ¤æ–­æ˜¯å¦å¯ä»¥ç§»åŠ¨æ£‹å­
 			if(flag) chess.setBounds(x, y, 55, 55);
 			
 		}
-		//µÚ¶şÖÖ£ºÉÏÓÒ
+		//ç¬¬äºŒç§ï¼šä¸Šå³
 		else if((me.getX()-chess.getX()) >=2
 				&&(me.getX()-chess.getX()) <= 57
 				&&(chess.getY()-me.getY()) >= 84
 				&&(chess.getY()-me.getY()) <= 141){
-			//ÕÒµ½¶ÔÓ¦µÄx×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„xåæ ‡
 			for(int ix=24; ix<=480; ix+=57){
 				if((ix -me.getX()) >=-55
 						&&(ix - me.getX()) <= 0){
@@ -286,7 +286,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÕÒµ½¶ÔÓ¦µÄy×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„yåæ ‡
 			for(int iy=56; iy<571; iy+=57){
 				if((iy - me.getY())>=-27
 						&&(iy-me.getY()) <=27){
@@ -294,7 +294,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñÓĞÕÏ°­£¬¼´ÕıÉÏ·½ÊÇ·ñÓĞÆå×Ó
+			//åˆ¤æ–­æ˜¯å¦æœ‰éšœç¢ï¼Œå³æ­£ä¸Šæ–¹æ˜¯å¦æœ‰æ£‹å­
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess.getX() == chesses[i].getX()
@@ -302,16 +302,16 @@ public class ChessRule {
 					flag = false;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔÒÆ¶¯Æå×Ó
+			//åˆ¤æ–­æ˜¯å¦å¯ä»¥ç§»åŠ¨æ£‹å­
 			if(flag) chess.setBounds(x, y, 55, 55);
 			
 		}
-		//µÚÈıÖÖ£ºÏÂ×ó
+		//ç¬¬ä¸‰ç§ï¼šä¸‹å·¦
 		else if((chess.getX()-me.getX()) >=2
 				&&(chess.getX()-me.getX()) <= 57
 				&&(me.getY()-chess.getY()) >= 84
 				&&(me.getY()-chess.getY()) <= 141){
-			//ÕÒµ½¶ÔÓ¦µÄx×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„xåæ ‡
 			for(int ix=24; ix<=480; ix+=57){
 				if(ix -me.getX() >=-55
 						&&ix - me.getX() <= 0){
@@ -319,7 +319,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÕÒµ½¶ÔÓ¦µÄy×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„yåæ ‡
 			for(int iy=56; iy<571; iy+=57){
 				if((iy - me.getY())>=-27
 						&&(iy-me.getY()) <=27){
@@ -327,7 +327,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñÓĞÕÏ°­£¬¼´ÕıÏÂ·½ÊÇ·ñÓĞÆå×Ó
+			//åˆ¤æ–­æ˜¯å¦æœ‰éšœç¢ï¼Œå³æ­£ä¸‹æ–¹æ˜¯å¦æœ‰æ£‹å­
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess.getX() == chesses[i].getX()
@@ -335,16 +335,16 @@ public class ChessRule {
 					flag = false;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔÒÆ¶¯Æå×Ó
+			//åˆ¤æ–­æ˜¯å¦å¯ä»¥ç§»åŠ¨æ£‹å­
 			if(flag) chess.setBounds(x, y, 55, 55);
 			
 		}
-		//µÚËÄÖÖ£ºÏÂÓÒ
+		//ç¬¬å››ç§ï¼šä¸‹å³
 		else if((me.getX()-chess.getX()) >=2
 				&&(me.getX()-chess.getX()) <= 57
 				&&(me.getY()-chess.getY()) >= 84
 				&&(me.getY()-chess.getY()) <= 141){
-			//ÕÒµ½¶ÔÓ¦µÄx×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„xåæ ‡
 			for(int ix=24; ix<=480; ix+=57){
 				if(ix -me.getX() >=-55
 						&&ix - me.getX() <= 0){
@@ -352,7 +352,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÕÒµ½¶ÔÓ¦µÄy×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„yåæ ‡
 			for(int iy=56; iy<571; iy+=57){
 				if((iy - me.getY())>=-27
 						&&(iy-me.getY()) <=27){
@@ -360,7 +360,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñÓĞÕÏ°­£¬¼´ÕıÏÂ·½ÊÇ·ñÓĞÆå×Ó
+			//åˆ¤æ–­æ˜¯å¦æœ‰éšœç¢ï¼Œå³æ­£ä¸‹æ–¹æ˜¯å¦æœ‰æ£‹å­
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess.getX() == chesses[i].getX()
@@ -368,16 +368,16 @@ public class ChessRule {
 					flag = false;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔÒÆ¶¯Æå×Ó
+			//åˆ¤æ–­æ˜¯å¦å¯ä»¥ç§»åŠ¨æ£‹å­
 			if(flag) chess.setBounds(x, y, 55, 55);
 			
 		}
-		//µÚÎåÖÖ:×óÉÏ
+		//ç¬¬äº”ç§:å·¦ä¸Š
 		else if((chess.getX()-me.getX()) >=59
 				&&(chess.getX()-me.getX()) <= 114
 				&&(chess.getY()-me.getY()) >= 27
 				&&(chess.getY()-me.getY()) <= 84){
-			//ÕÒµ½¶ÔÓ¦µÄx×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„xåæ ‡
 			for(int ix=24; ix<=480; ix+=57){
 				if(ix -me.getX() >=-55
 						&&ix - me.getX() <= 0){
@@ -385,7 +385,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÕÒµ½¶ÔÓ¦µÄy×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„yåæ ‡
 			for(int iy=56; iy<571; iy+=57){
 				if((iy - me.getY())>=-27
 						&&(iy-me.getY()) <=27){
@@ -393,7 +393,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñÓĞÕÏ°­£¬¼´×óÇ°·½ÊÇ·ñÓĞÆå×Ó
+			//åˆ¤æ–­æ˜¯å¦æœ‰éšœç¢ï¼Œå³å·¦å‰æ–¹æ˜¯å¦æœ‰æ£‹å­
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess.getY() == chesses[i].getY()
@@ -401,16 +401,16 @@ public class ChessRule {
 					flag = false;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔÒÆ¶¯Æå×Ó
+			//åˆ¤æ–­æ˜¯å¦å¯ä»¥ç§»åŠ¨æ£‹å­
 			if(flag) chess.setBounds(x, y, 55, 55);
 			
 		}
-		//µÚÁùÖÖ£º ×óÏÂ
+		//ç¬¬å…­ç§ï¼š å·¦ä¸‹
 		else if((chess.getX()-me.getX()) >=59
 				&&(chess.getX()-me.getX()) <= 114
 				&&(me.getY()-chess.getY()) >= 27
 				&&(me.getY()-chess.getY()) <= 84){
-			//ÕÒµ½¶ÔÓ¦µÄx×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„xåæ ‡
 			for(int ix=24; ix<=480; ix+=57){
 				if(ix -me.getX() >=-55
 						&&ix - me.getX() <= 0){
@@ -418,7 +418,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÕÒµ½¶ÔÓ¦µÄy×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„yåæ ‡
 			for(int iy=56; iy<571; iy+=57){
 				if((iy - me.getY())>=-27
 						&&(iy-me.getY()) <=27){
@@ -426,7 +426,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñÓĞÕÏ°­£¬¼´×óÇ°·½ÊÇ·ñÓĞÆå×Ó
+			//åˆ¤æ–­æ˜¯å¦æœ‰éšœç¢ï¼Œå³å·¦å‰æ–¹æ˜¯å¦æœ‰æ£‹å­
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess.getY() == chesses[i].getY()
@@ -434,16 +434,16 @@ public class ChessRule {
 					flag = false;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔÒÆ¶¯Æå×Ó
+			//åˆ¤æ–­æ˜¯å¦å¯ä»¥ç§»åŠ¨æ£‹å­
 			if(flag) chess.setBounds(x, y, 55, 55);
 			
 		}
-		//µÚÆßÖÖ£ºÓÒÉÏ
+		//ç¬¬ä¸ƒç§ï¼šå³ä¸Š
 		else if((me.getX()-chess.getX()) >=59
 				&&(me.getX()-chess.getX()) <= 114
 				&&(chess.getY()-me.getY()) >= 27
 				&&(chess.getY()-me.getY()) <= 84){
-			//ÕÒµ½¶ÔÓ¦µÄx×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„xåæ ‡
 			for(int ix=24; ix<=480; ix+=57){
 				if(ix -me.getX() >=-55
 						&&ix - me.getX() <= 0){
@@ -451,7 +451,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÕÒµ½¶ÔÓ¦µÄy×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„yåæ ‡
 			for(int iy=56; iy<571; iy+=57){
 				if((iy - me.getY())>=-27
 						&&(iy-me.getY()) <=27){
@@ -459,7 +459,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñÓĞÕÏ°­£¬¼´ÓÒÇ°·½ÊÇ·ñÓĞÆå×Ó
+			//åˆ¤æ–­æ˜¯å¦æœ‰éšœç¢ï¼Œå³å³å‰æ–¹æ˜¯å¦æœ‰æ£‹å­
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess.getY() == chesses[i].getY()
@@ -467,16 +467,16 @@ public class ChessRule {
 					flag = false;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔÒÆ¶¯Æå×Ó
+			//åˆ¤æ–­æ˜¯å¦å¯ä»¥ç§»åŠ¨æ£‹å­
 			if(flag) chess.setBounds(x, y, 55, 55);
 			
 		}
-		//µÚ°ËÖÖ£ºÓÒÏÂ
+		//ç¬¬å…«ç§ï¼šå³ä¸‹
 		else if((me.getX()-chess.getX()) >=59
 				&&(me.getX()-chess.getX()) <= 114
 				&&(me.getY()-chess.getY()) >= 27
 				&&(me.getY()-chess.getY()) <= 84){
-			//ÕÒµ½¶ÔÓ¦µÄx×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„xåæ ‡
 			for(int ix=24; ix<=480; ix+=57){
 				if(ix -me.getX() >=-55
 						&&ix - me.getX() <= 0){
@@ -484,7 +484,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÕÒµ½¶ÔÓ¦µÄy×ø±ê
+			//æ‰¾åˆ°å¯¹åº”çš„yåæ ‡
 			for(int iy=56; iy<571; iy+=57){
 				if((iy - me.getY())>=-27
 						&&(iy-me.getY()) <=27){
@@ -492,7 +492,7 @@ public class ChessRule {
 					break;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñÓĞÕÏ°­£¬¼´ÕıÉÏ·½ÊÇ·ñÓĞÆå×Ó
+			//åˆ¤æ–­æ˜¯å¦æœ‰éšœç¢ï¼Œå³æ­£ä¸Šæ–¹æ˜¯å¦æœ‰æ£‹å­
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess.getY() == chesses[i].getY()
@@ -500,22 +500,22 @@ public class ChessRule {
 					flag = false;
 				}
 			}
-			//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔÒÆ¶¯Æå×Ó
+			//åˆ¤æ–­æ˜¯å¦å¯ä»¥ç§»åŠ¨æ£‹å­
 			if(flag) chess.setBounds(x, y, 55, 55);
 			
 		}
 	}
-	//Âí³ÔÆå¹æÔò
+	//é©¬åƒæ£‹è§„åˆ™
 	public void horseKillRule(JLabel chess1, JLabel chess2, JLabel[] chesses){
-		//ÅĞ¶ÏÊÇ·ñÓĞÕÏ°­
+		//åˆ¤æ–­æ˜¯å¦æœ‰éšœç¢
 		boolean flag = true;
 		
-		//°´ÕÕ×ßÆå¹æÔòÒ²ÊÇÒª·Ö°ËÖÖÇé¿ö
-		//µÚÒ»ÖÖ£ºÉÏÒÆ¶¯³Ô×ó±ß
+		//æŒ‰ç…§èµ°æ£‹è§„åˆ™ä¹Ÿæ˜¯è¦åˆ†å…«ç§æƒ…å†µ
+		//ç¬¬ä¸€ç§ï¼šä¸Šç§»åŠ¨åƒå·¦è¾¹
 		if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
 				&&chess1.getX() - chess2.getY() == 57
 				&&chess1.getY() - chess2.getY() == 114){
-			//ÅĞ¶ÏÕıÉÏ·½ÊÇ·ñÓĞÕÏ°­
+			//åˆ¤æ–­æ­£ä¸Šæ–¹æ˜¯å¦æœ‰éšœç¢
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess1.getX() == chesses[i].getX()
@@ -528,11 +528,11 @@ public class ChessRule {
 				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
 			} 
 		}
-		//µÚ¶şÖÖ£ºÉÏÒÆ³ÔÓÒ±ß
+		//ç¬¬äºŒç§ï¼šä¸Šç§»åƒå³è¾¹
 		else if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
 				&&chess2.getX() - chess1.getY() == 57
 				&&chess1.getY() - chess2.getY() == 114){
-			//ÅĞ¶ÏÕıÉÏ·½ÊÇ·ñÓĞÕÏ°­
+			//åˆ¤æ–­æ­£ä¸Šæ–¹æ˜¯å¦æœ‰éšœç¢
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess1.getX() == chesses[i].getX()
@@ -545,11 +545,11 @@ public class ChessRule {
 				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
 			} 
 		}
-		//µÚÈıÖÖ£ºÏÂÒÆ¶¯³Ô×ó±ß
+		//ç¬¬ä¸‰ç§ï¼šä¸‹ç§»åŠ¨åƒå·¦è¾¹
 		else if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
 				&&chess1.getX() - chess2.getY() == 57
 				&&chess2.getY() - chess1.getY() == 114){
-			//ÅĞ¶ÏÕıÏÂ·½ÊÇ·ñÓĞÕÏ°­
+			//åˆ¤æ–­æ­£ä¸‹æ–¹æ˜¯å¦æœ‰éšœç¢
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess1.getX() == chesses[i].getX()
@@ -562,11 +562,11 @@ public class ChessRule {
 				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
 			} 
 		}
-		//µÚËÄÖÖ£ºÏÂÒÆ¶¯³ÔÓÒ±ß
+		//ç¬¬å››ç§ï¼šä¸‹ç§»åŠ¨åƒå³è¾¹
 		else if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
 				&&chess2.getX() - chess1.getY() == 57
 				&&chess2.getY() - chess1.getY() == 114){
-			//ÅĞ¶ÏÕıÏÂ·½ÊÇ·ñÓĞÕÏ°­
+			//åˆ¤æ–­æ­£ä¸‹æ–¹æ˜¯å¦æœ‰éšœç¢
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess1.getX() == chesses[i].getX()
@@ -579,11 +579,11 @@ public class ChessRule {
 				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
 			} 
 		}
-		//µÚÎåÖÖ£º×óÒÆ¶¯³ÔÉÏ±ß
+		//ç¬¬äº”ç§ï¼šå·¦ç§»åŠ¨åƒä¸Šè¾¹
 		else if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
 				&&chess1.getX() - chess2.getY() == 114
 				&&chess1.getY() - chess2.getY() == 57){
-			//ÅĞ¶Ï×óÇ°·½ÊÇ·ñÓĞÕÏ°­
+			//åˆ¤æ–­å·¦å‰æ–¹æ˜¯å¦æœ‰éšœç¢
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess1.getY() == chesses[i].getY()
@@ -596,11 +596,11 @@ public class ChessRule {
 				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
 			} 
 		}
-		//µÚÁùÖÖ£º×óÒÆ¶¯³ÔÏÂ±ß
+		//ç¬¬å…­ç§ï¼šå·¦ç§»åŠ¨åƒä¸‹è¾¹
 		else if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
 				&&chess1.getX() - chess2.getY() == 114
 				&&chess2.getY() - chess1.getY() == 57){
-			//ÅĞ¶Ï×óÇ°·½ÊÇ·ñÓĞÕÏ°­
+			//åˆ¤æ–­å·¦å‰æ–¹æ˜¯å¦æœ‰éšœç¢
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess1.getY() == chesses[i].getY()
@@ -613,11 +613,11 @@ public class ChessRule {
 				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
 			} 
 		}
-		//µÚÆßÖÖ£ºÓÒÒÆ¶¯³ÔÉÏ±ß
+		//ç¬¬ä¸ƒç§ï¼šå³ç§»åŠ¨åƒä¸Šè¾¹
 		else if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
 				&&chess2.getX() - chess1.getY() == 114
 				&&chess1.getY() - chess2.getY() == 57){
-			//ÅĞ¶ÏÓÒÇ°·½ÊÇ·ñÓĞÕÏ°­
+			//åˆ¤æ–­å³å‰æ–¹æ˜¯å¦æœ‰éšœç¢
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess1.getY() == chesses[i].getY()
@@ -630,11 +630,11 @@ public class ChessRule {
 				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
 			} 
 		}
-		//µÚ°ËÖÖ£ºÓÒÒÆ¶¯³ÔÏÂ±ß
+		//ç¬¬å…«ç§ï¼šå³ç§»åŠ¨åƒä¸‹è¾¹
 		else if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
 				&&chess2.getX() - chess1.getY() == 114
 				&&chess2.getY() - chess1.getY() == 57){
-			//ÅĞ¶ÏÓÒÇ°·½ÊÇ·ñÓĞÕÏ°­
+			//åˆ¤æ–­å³å‰æ–¹æ˜¯å¦æœ‰éšœç¢
 			for(int i=0; i<32; i++){
 				if(chesses[i].isVisible() 
 						&&chess1.getY() == chesses[i].getY()
@@ -646,6 +646,757 @@ public class ChessRule {
 				chess2.setVisible(false);
 				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
 			} 
+		}
+	}
+	
+	//ç›¸èµ°èµ·è§„åˆ™
+	public void ministerMoveRule(JLabel chess, JLabel [] chesses, MouseEvent me ){
+		//åˆ¤æ–­ç§»åŠ¨æ˜¯å¦æœ‰éšœç¢
+		boolean flag = false;
+		//éœ€è¦ä¸¤ä¸ªåæ ‡æ¥ç¡®å®šæ£‹å­ç§»åŠ¨çš„ä½ç½®
+		int x = 0;
+		int y = 0;
+		//ä»æ–¹å‘ä¸Šæ¥çœ‹ç›¸çš„ç§»åŠ¨åˆ†ä¸ºå››ç§ï¼šä¸Šå·¦ã€ä¸Šå³ã€ä¸‹å·¦ï¼Œä¸‹å³
+		//ç¬¬ä¸€ç§ï¼šä¸Šå·¦
+		if(chess.getX() - me.getX() >= 59 
+				&&chess.getX() - me.getX() <= 114
+				&&chess.getY() - me.getY() >= 87
+				&&chess.getY() - me.getY() <= 141){
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„xåæ ‡
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„yåæ ‡
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//åˆ¤æ–­å·¦å‰æ˜¯å¦æœ‰éšœç¢
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess.getX() - chesses[i].getX() == 57 
+						&&chess.getY() - chesses[i].getY() == 57){
+					flag = true;
+					break;
+				}
+			}
+			//çº¢æ——å’Œé»‘æ£‹éƒ½ä¸èƒ½è¿‡æ²³ï¼Œæ‰€ä»¥ç§»åŠ¨æ˜¯è¦æ³¨æ„åˆ¤æ–­ä½ç½®
+			if(flag == false && y >= 341
+					&&chess.getName().charAt(0) == 'çº¢'){
+				chess.setBounds(x, y, 55,55);
+			}
+			else if(flag == false && y <= 284
+					&&chess.getName().charAt(0) == 'é»‘'){
+				chess.setBounds(x, y, 55,55);
+			}
+		}
+		//ç¬¬äºŒç§ï¼šä¸Šå³
+		else if(me.getX() - chess.getX() >= 114
+				&&me.getX() - chess.getX() <= 169
+				&&chess.getY() - me.getY() >= 87
+				&&chess.getY() - me.getY() <= 141){
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„xåæ ‡
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„yåæ ‡
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//åˆ¤æ–­å³å‰æ˜¯å¦æœ‰éšœç¢
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess.getX() - chesses[i].getX() == -57 
+						&&chess.getY() - chesses[i].getY() == 57){
+					flag = true;
+					break;
+				}
+			}
+			//çº¢æ——å’Œé»‘æ£‹éƒ½ä¸èƒ½è¿‡æ²³ï¼Œæ‰€ä»¥ç§»åŠ¨æ˜¯è¦æ³¨æ„åˆ¤æ–­ä½ç½®
+			if(flag == false && y >= 341
+					&&chess.getName().charAt(0) == 'çº¢'){
+				chess.setBounds(x, y, 55,55);
+			}
+			else if(flag == false && y <= 284
+					&&chess.getName().charAt(0) == 'é»‘'){
+				chess.setBounds(x, y, 55,55);
+			}
+		}
+		//ç¬¬ä¸‰ç§ï¼šä¸‹å·¦
+		else if(chess.getX() - me.getX() >= 59 
+				&&chess.getX() - me.getX() <= 114
+				&&me.getY() - chess.getY() >= -87
+				&&me.getY() - chess.getY() <= 141){
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„xåæ ‡
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„yåæ ‡
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//åˆ¤æ–­å·¦ä¸‹æ˜¯å¦æœ‰éšœç¢
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess.getX() - chesses[i].getX() == 57 
+						&&chess.getY() - chesses[i].getY() == -57){
+					flag = true;
+					break;
+				}
+			}
+			//çº¢æ——å’Œé»‘æ£‹éƒ½ä¸èƒ½è¿‡æ²³ï¼Œæ‰€ä»¥ç§»åŠ¨æ˜¯è¦æ³¨æ„åˆ¤æ–­ä½ç½®
+			if(flag == false && y >= 341
+					&&chess.getName().charAt(0) == 'çº¢'){
+				chess.setBounds(x, y, 55,55);
+			}
+			else if(flag == false && y <= 284
+					&&chess.getName().charAt(0) == 'é»‘'){
+				chess.setBounds(x, y, 55,55);
+			}
+		}
+		//ç¬¬å››ç§ï¼šä¸‹å³
+		else if(me.getX() - chess.getX() >= 114
+				&&me.getX() - chess.getX() <= 169
+				&&me.getY() - chess.getY() >= 87
+				&&me.getY() - chess.getY() <= 141){
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„xåæ ‡
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„yåæ ‡
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//åˆ¤æ–­å³ä¸‹æ˜¯å¦æœ‰éšœç¢
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess.getX() - chesses[i].getX() == -57 
+						&&chess.getY() - chesses[i].getY() == -57){
+					flag = true;
+					break;
+				}
+			}
+			//çº¢æ——å’Œé»‘æ£‹éƒ½ä¸èƒ½è¿‡æ²³ï¼Œæ‰€ä»¥ç§»åŠ¨æ˜¯è¦æ³¨æ„åˆ¤æ–­ä½ç½®
+			if(flag == false && y >= 341
+					&&chess.getName().charAt(0) == 'çº¢'){
+				chess.setBounds(x, y, 55,55);
+			}
+			else if(flag == false && y <= 284
+					&&chess.getName().charAt(0) == 'é»‘'){
+				chess.setBounds(x, y, 55,55);
+			}
+		}
+	}
+	//ç›¸åƒæ£‹å­è§„åˆ™ï¼Œä¹Ÿæ˜¯å››ç§æ–¹å‘åƒæ£‹å­ï¼šä¸Šå·¦ã€ä¸Šå³ã€ä¸‹å·¦ï¼Œä¸‹å³
+	public void ministerKillRule(JLabel chess1, JLabel chess2, JLabel[] chesses){
+		//åˆ¤æ–­æ˜¯å¦æœ‰éšœç¢
+		boolean flag = false;
+		//ä¸Šå·¦åƒæ£‹å­
+		if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
+				&&chess1.getX() - chess2.getX() == 114
+				&&chess1.getY() - chess2.getY() ==114){
+			//åˆ¤æ–­å·¦å‰æ˜¯å¦æœ‰éšœç¢
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess1.getX() - chesses[i].getX() == 57 
+						&&chess1.getY() - chesses[i].getY() == 57){
+					flag = true;
+					break;
+				}
+			}
+			//çº¢ç›¸åƒé»‘æ£‹
+			if(flag == false && chess2.getY() >= 341
+					&&chess1.getName().charAt(0) == 'çº¢'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//é»‘ç›¸åƒçº¢æ£‹
+			else if(flag == false && chess2.getY() <= 284
+					&&chess1.getName().charAt(0) == 'é»‘'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//ç¬¬äºŒç§ï¼šä¸Šå³åƒæ£‹å­
+		else if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
+				&&chess2.getX() - chess1.getX() == 114
+				&&chess1.getY() - chess2.getY() ==114){
+			//åˆ¤æ–­å³å‰æ˜¯å¦æœ‰éšœç¢
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess1.getX() - chesses[i].getX() == -57 
+						&&chess1.getY() - chesses[i].getY() == 57){
+					flag = true;
+					break;
+				}
+			}
+			//çº¢ç›¸åƒé»‘æ£‹
+			if(flag == false && chess2.getY() >= 341
+					&&chess1.getName().charAt(0) == 'çº¢'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//é»‘ç›¸åƒçº¢æ£‹
+			else if(flag == false && chess2.getY() <= 284
+					&&chess1.getName().charAt(0) == 'é»‘'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//ç¬¬ä¸‰ç§ï¼šä¸‹å·¦åƒæ£‹å­
+		else if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
+				&&chess1.getX() - chess2.getX() == 114
+				&&chess2.getY() - chess1.getY() ==114){
+			//åˆ¤æ–­å·¦ä¸‹æ˜¯å¦æœ‰éšœç¢
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess1.getX() - chesses[i].getX() == 57 
+						&&chess1.getY() - chesses[i].getY() == -57){
+					flag = true;
+					break;
+				}
+			}
+			//çº¢ç›¸åƒé»‘æ£‹
+			if(flag == false && chess2.getY() >= 341
+					&&chess1.getName().charAt(0) == 'çº¢'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//é»‘ç›¸åƒçº¢æ£‹
+			else if(flag == false && chess2.getY() <= 284
+					&&chess1.getName().charAt(0) == 'é»‘'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//ç¬¬å››ç§ï¼šä¸‹å³åƒæ£‹å­
+		else if(chess1.getName().charAt(0) != chess2.getName().charAt(0)
+				&&chess2.getX() - chess1.getX() == 114
+				&&chess2.getY() - chess1.getY() ==114){
+			//åˆ¤æ–­å³ä¸‹æ˜¯å¦æœ‰éšœç¢
+			for(int i=0; i<32; i++){
+				if(chesses[i].isVisible()
+						&&chess1.getX() - chesses[i].getX() == -57 
+						&&chess1.getY() - chesses[i].getY() == -57){
+					flag = true;
+					break;
+				}
+			}
+			//çº¢ç›¸åƒé»‘æ£‹
+			if(flag == false && chess2.getY() >= 341
+					&&chess1.getName().charAt(0) == 'çº¢'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//é»‘ç›¸åƒçº¢æ£‹
+			else if(flag == false && chess2.getY() <= 284
+					&&chess1.getName().charAt(0) == 'é»‘'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+	}
+	//å£«çš„ç§»åŠ¨è§„åˆ™
+	public void advisorMoveRule(JLabel chess, MouseEvent me){
+		//éœ€è¦ä¸¤ä¸ªåæ ‡æ¥ç¡®å®šä½ç½®
+		int x=0;
+		int y=0;
+		
+		//ä»æ–¹å‘ä¸Šæ¥çœ‹åˆ†ä¸ºå››ç§ç§»åŠ¨æƒ…å†µï¼šä¸Šå·¦ã€ä¸Šå³ã€ä¸‹å·¦ï¼Œä¸‹å³
+		//ç¬¬ä¸€ç§ï¼šä¸Šå·¦
+		if(chess.getX() - me.getX() >= 2 
+				&&chess.getX() - me.getX() <= 57
+				&&chess.getY() - me.getY() >= 30
+				&&chess.getY() - me.getY() <= 84){
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„xåæ ‡
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„yåæ ‡
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//çº¢å£«å’Œé»‘å£«éƒ½ä¸èƒ½è¿‡æ²³ä¸”åœ¨æŒ‡å®šåŒºåŸŸå†…
+			//çº¢å£«ç§»åŠ¨
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//é»‘å£«ç§»åŠ¨
+			else if(x >= 195 && x <= 309
+					&& y >= 56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+		//ç¬¬äºŒç§ï¼šä¸Šå³
+		else if(me.getX() - chess.getX() >= 57 
+				&&me.getX() - chess.getX() <= 112
+				&&chess.getY() - me.getY() >= 30
+				&&chess.getY() - me.getY() <= 84){
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„xåæ ‡
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„yåæ ‡
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//çº¢å£«å’Œé»‘å£«éƒ½ä¸èƒ½è¿‡æ²³ä¸”åœ¨æŒ‡å®šåŒºåŸŸå†…
+			//çº¢å£«ç§»åŠ¨
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//é»‘å£«ç§»åŠ¨
+			else if(x >= 195 && x <= 309
+					&& y >= 56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+		//ç¬¬ä¸‰ç§ï¼šä¸‹å·¦
+		else if(chess.getX() - me.getX() >= 2 
+				&&chess.getX() - me.getX() <= 57
+				&&me.getY() - chess.getY() >= 30
+				&&me.getY() - chess.getY() <= 84){
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„xåæ ‡
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„yåæ ‡
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//çº¢å£«å’Œé»‘å£«éƒ½ä¸èƒ½è¿‡æ²³ä¸”åœ¨æŒ‡å®šåŒºåŸŸå†…
+			//çº¢å£«ç§»åŠ¨
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//é»‘å£«ç§»åŠ¨
+			else if(x >= 195 && x <= 309
+					&& y >=56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+		//ç¬¬å››ç§ï¼šä¸‹å³
+		else if(me.getX() - chess.getX() >= 57 
+				&&me.getX() - chess.getX() <= 112
+				&&me.getY() - chess.getY() >= 30
+				&&me.getY() - chess.getY() <= 84){
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„xåæ ‡
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„yåæ ‡
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//çº¢å£«å’Œé»‘å£«éƒ½ä¸èƒ½è¿‡æ²³ä¸”åœ¨æŒ‡å®šåŒºåŸŸå†…
+			//çº¢å£«ç§»åŠ¨
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//é»‘å£«ç§»åŠ¨
+			else if(x >= 195 && x <= 309
+					&& y >= 56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+	}
+	//å£«çš„åƒæ£‹è§„åˆ™
+	//ä¹Ÿæ˜¯å››ä¸ªæ–¹å‘åƒæ£‹å­ï¼šä¸Šå·¦ã€ä¸Šå³ã€ä¸‹å·¦ï¼Œä¸‹å³
+	public void advisorKillRule(JLabel chess1, JLabel chess2){
+		//ç¬¬ä¸€ç§ï¼šä¸Šå·¦åƒæ£‹å­
+		if(chess1.getX() - chess2.getX() == 57 
+				&&chess1.getY() -chess2.getY() == 57){
+			//çº¢å£«å’Œé»‘å£«éƒ½ä¸èƒ½è¿‡æ²³ä¸”åœ¨æŒ‡å®šåŒºåŸŸå†…
+			//çº¢å£«ç§»åŠ¨åƒé»‘æ£‹
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == 'çº¢'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//é»‘å£«ç§»åŠ¨åƒçº¢æ——
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >=56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == 'é»‘'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//ä¸Šå³åƒæ£‹å­
+		else if(chess2.getX() - chess1.getX() == 57 
+				&&chess1.getY() -chess2.getY() == 57){
+			//çº¢å£«å’Œé»‘å£«éƒ½ä¸èƒ½è¿‡æ²³ä¸”åœ¨æŒ‡å®šåŒºåŸŸå†…
+			//çº¢å£«ç§»åŠ¨åƒé»‘æ£‹
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == 'çº¢'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//é»‘å£«ç§»åŠ¨åƒçº¢æ——
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == 'é»‘'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//ä¸‹å·¦åƒæ£‹å­
+		else if(chess1.getX() - chess2.getX() == 57 
+				&&chess2.getY() -chess1.getY() == 57){
+			//çº¢å£«å’Œé»‘å£«éƒ½ä¸èƒ½è¿‡æ²³ä¸”åœ¨æŒ‡å®šåŒºåŸŸå†…
+			//çº¢å£«ç§»åŠ¨åƒé»‘æ£‹
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == 'çº¢'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//é»‘å£«ç§»åŠ¨åƒçº¢æ——
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == 'é»‘'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//ä¸‹å³åƒæ£‹å­
+		else if(chess2.getX() - chess1.getX() == 57 
+				&&chess2.getY() -chess1.getY() == 57){
+			//çº¢å£«å’Œé»‘å£«éƒ½ä¸èƒ½è¿‡æ²³ä¸”åœ¨æŒ‡å®šåŒºåŸŸå†…
+			//çº¢å£«ç§»åŠ¨åƒé»‘æ£‹
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == 'çº¢'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//é»‘å£«ç§»åŠ¨åƒçº¢æ——
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == 'é»‘'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+	}
+	//å°†ã€å¸…ç§»åŠ¨è§„åˆ™
+	public void kingMoveRule(JLabel chess, MouseEvent me){
+		//éœ€è¦ä¸¤ä¸ªåæ ‡ç¡®å®šç§»åŠ¨ä½ç½®
+		int x=0;
+		int y=0;
+		//å°†ã€å¸…ç§»åŠ¨æ–¹å‘ä¹Ÿæ˜¯å››ç§ï¼šä¸Šã€ä¸‹ã€å·¦ã€å³ 
+		//ç¬¬ä¸€ç§ï¼šä¸Š
+		if(chess.getX() - me.getX() >= -55 
+				&&chess.getX() - me.getX() <= 0
+				&&chess.getY() - me.getY() >= 30
+				&&chess.getY() - me.getY() <= 84){
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„xåæ ‡
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„yåæ ‡
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//çº¢å¸…å’Œé»‘å°†éƒ½ä¸èƒ½è¿‡æ²³ä¸”åœ¨æŒ‡å®šåŒºåŸŸå†…
+			//çº¢å¸…ç§»åŠ¨
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//é»‘å°†ç§»åŠ¨
+			else if(x >= 195 && x <= 309
+					&& y >= 56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+		//ç¬¬äºŒç§ï¼šä¸‹
+		else if(chess.getX() - me.getX() >= -55 
+				&&chess.getX() - me.getX() <= 0
+				&&me.getY() - chess.getY() >= 30
+				&&me.getY() - chess.getY() <= 84){
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„xåæ ‡
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„yåæ ‡
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//çº¢å¸…å’Œé»‘å°†éƒ½ä¸èƒ½è¿‡æ²³ä¸”åœ¨æŒ‡å®šåŒºåŸŸå†…
+			//çº¢å¸…ç§»åŠ¨
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//é»‘å°†ç§»åŠ¨
+			else if(x >= 195 && x <= 309
+					&& y>=56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+		//ç¬¬ä¸‰ç§ï¼šå·¦
+		else if(chess.getX() - me.getX() >= 2
+				&&chess.getX() - me.getX() <= 57
+				&&me.getY() - chess.getY() >= -27
+				&&me.getY() - chess.getY() <= 27){
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„xåæ ‡
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„yåæ ‡
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//çº¢å¸…å’Œé»‘å°†éƒ½ä¸èƒ½è¿‡æ²³ä¸”åœ¨æŒ‡å®šåŒºåŸŸå†…
+			//çº¢å¸…ç§»åŠ¨
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//é»‘å°†ç§»åŠ¨
+			else if(x >= 195 && x <= 309
+					&& y>=56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+		//ç¬¬å››ç§ï¼šå³
+		else if(me.getX() - chess.getX() >= 57 
+				&&me.getX() - chess.getX() <= 112
+				&&me.getY() - chess.getY() >= -27
+				&&me.getY() - chess.getY() <= 27){
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„xåæ ‡
+			for(int ix=24; ix<=480;ix+=57){
+				if(ix - me.getX() >= -55 
+						&&ix - me.getX() <= 0){
+					x = ix;
+					break;
+				}
+			}
+			//éå†æŸ¥æ‰¾æŒ‡å®šä½ç½®çš„yåæ ‡
+			for(int iy=56; iy<=571; iy+=57){
+				if(iy - me.getY() >= -27
+						&&iy - me.getY() <= 27){
+					y = iy;
+					break;
+				}
+			}
+			//çº¢å¸…å’Œé»‘å°†éƒ½ä¸èƒ½è¿‡æ²³ä¸”åœ¨æŒ‡å®šåŒºåŸŸå†…
+			//çº¢å¸…ç§»åŠ¨
+			if(x >= 195 && x <= 309
+					&& y >= 455 && y <= 569){
+				chess.setBounds(x, y, 55, 55);
+			}
+			//é»‘å°†ç§»åŠ¨
+			else if(x >= 195 && x <= 309
+					&& y>=56 && y <= 170){
+				chess.setBounds(x, y, 55, 55);
+			}
+		}
+	}
+	//å°†ã€å¸…åƒæ£‹å­è§„åˆ™
+	public void kingMoveRule(JLabel chess1, JLabel chess2, JLabel[] chesses){
+		//åˆ¤æ–­å¸…å’Œå°†æ˜¯å¦å¯ä»¥ç›´æ¥åƒå¯¹æ–¹
+		boolean flag = true;
+		//å°†ã€å¸…åƒæ£‹ä¹Ÿæ˜¯å…­ç§ï¼šä¸Šã€ä¸‹ã€å·¦ã€å³ã€å¸…ä¸Šåƒå°†ã€å°†ä¸‹åƒå¸…ã€‚
+		//è¦å°¤å…¶æ³¨æ„å¸…å’Œå°†ç›´æ¥é¢å¯¹æ—¶çš„æƒ…å†µï¼Œ
+		//ä¸Š
+		if(chess1.getX() == chess2.getX() 
+				&& chess1.getY() -chess2.getY() == 57){
+			//çº¢å¸…åƒé»‘æ£‹
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == 'çº¢'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//é»‘å°†åƒçº¢æ£‹
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == 'é»‘'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//ä¸‹
+		else if(chess1.getX() == chess2.getX() 
+				&& chess2.getY() -chess1.getY() == 57){
+			//çº¢å¸…åƒé»‘æ£‹
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == 'çº¢'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//é»‘å°†åƒçº¢æ£‹
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == 'é»‘'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//å·¦
+		else if(chess1.getX() - chess2.getX() == 57
+				&& chess1.getY() == chess2.getY()){
+			//çº¢å¸…åƒé»‘æ£‹
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == 'çº¢'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//é»‘å°†åƒçº¢æ£‹
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == 'é»‘'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//å³
+		else if(chess2.getX() - chess1.getX() == 57
+				&& chess1.getY() == chess2.getY()){
+			//çº¢å¸…åƒé»‘æ£‹
+			if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 455 && chess2.getY() <= 569
+					&&chess1.getName().charAt(0) == 'çº¢'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+			//é»‘å°†åƒçº¢æ£‹
+			else if(chess2.getX() >= 195 && chess2.getX() <= 309
+					&& chess2.getY() >= 56 && chess2.getY() <= 170
+					&&chess1.getName().charAt(0) == 'é»‘'){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//å¸…ä¸Šåƒå°†
+		else if(chess1.getName().charAt(1) == 'å¸…' 
+				&& chess2.getName().charAt(1) == 'å°†'
+				&& chess1.getX() == chess2.getX()){
+			for(int i=0; i<32; i++){
+				if(chesses[i].getX() == chess1.getX() 
+				   	&& chesses[i].getName() != chess1.getName()
+				  	&& chesses[i].getName() != chess2.getName()){
+					flag = false;
+					break;
+				}
+			}
+			if(flag){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
+		}
+		//å°†ä¸‹åƒæ£‹
+		else if(chess1.getName().charAt(1) == 'å°†' 
+				&& chess2.getName().charAt(1) == 'å¸…'
+				&& chess1.getX() == chess2.getX()){
+			for(int i=0; i<32; i++){
+				if(chesses[i].getX() == chess1.getX() 
+				   	&& chesses[i].getName() != chess1.getName()
+				  	&& chesses[i].getName() != chess2.getName()){
+					flag = false;
+					break;
+				}
+			}
+			if(flag){
+				chess2.setVisible(false);
+				chess1.setBounds(chess2.getX(), chess2.getY(), 55, 55);
+			}
 		}
 	}
 }
