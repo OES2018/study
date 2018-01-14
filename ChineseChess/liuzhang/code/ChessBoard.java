@@ -1,4 +1,4 @@
-package lz.ChineseChess;
+package lz.ChineseChese;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -45,9 +45,20 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 	boolean chessClick;
 	//控制棋子闪烁的线程
 	Thread t1;
+	/**
+	 *  chessColor=1  黑棋走棋
+	 *  chessColor=2  红棋走棋（默认）
+	 *  chessColor=3  双方都不能走棋
+	 */
+	int chessColor=2;
+	//象棋规则类
+	ChessRule rule;
 	static int play,i;
 	//构造函数初始化一个窗口
 	public ChessBoard(String title){
+		//在初始化窗口时实例化所需对象
+		rule = new ChessRule();
+		//定义棋子类
 		ChessPiece chessPiece;
 		//获得窗口引用
 		con = this.getContentPane();
@@ -92,6 +103,7 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 		//image = new JLabel(new ImageIcon("..\\lz.ChineseChese\\src\\image\\main.gif"));
 		con.add(image);
 		image.setBounds(0, 30, 558, 620);
+		image.addMouseListener(this);
 		
 		//关闭窗口
 		this.addWindowListener(new WindowAdapter(){
@@ -122,6 +134,9 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 		//点击开始新游戏按钮,
 		if(button.getSource().equals(start)){
 			//初始化棋子位置
+			chessClick=false;
+			chessColor=2;
+			st.setText("红棋走棋");
 			int i,k;
 			//“------黑棋-------”
 			//车
@@ -185,31 +200,296 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 		}
 	}
 	@Override
-	//监听棋子是否被点击
+	/**
+	 ** 重写的线程方法来控制棋子闪烁
+	 */
+	public void run() {
+		while(true){
+			//点击棋子时棋子闪烁
+			if(chessClick){
+				chess[play].setVisible(false);
+				//设置闪烁时间间隔
+				try{
+					t1.sleep(200);
+				}catch(Exception e){
+				}
+				chess[play].setVisible(true);			
+			}
+			//棋子走动后系统消息提示对方走棋
+			else{
+				st.setVisible(false);
+				try {
+					t1.sleep(200);
+				} catch (Exception e) {	
+				}
+				st.setVisible(true);
+			}
+			try{
+				t1.sleep(350);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	@Override
+	//监听棋子和棋盘是否被点击
 	public void mouseClicked(MouseEvent me) {
 		System.out.println("mouse");
 		//当前坐标
 		int x,y;
-		//鼠标发生点击后开始线程
+		//鼠标发生点击后开始线程,若是线程不存在则产生一个新的线程
 		if(t1==null){
 			t1 = new Thread(this);
 			t1.start();
 		}
-		if(!chessClick){
-			for(int i=0;i<32;i++){
-				if(me.getSource().equals(chess[i])){
-					play=i;
-					//触发闪烁条件
-					//int x1=chess[i].getX();
-					//int y1=chess[i].getY();
-					//System.out.println(x1+" "+ y1);
-					//System.out.println(chess[i].getName().charAt(0));
-					chessClick=true;
-					break;
+		if(me.getSource().equals(image)){
+			//红棋走棋子
+			if(chessColor ==2 && chess[play].getName().charAt(0) == '红'){
+				x = chess[play].getX();
+				y = chess[play].getY();
+				//移动卒、兵
+				if((play >= 11 && play <= 15)
+						|| (play >= 27 && play <= 31)){
+					rule.soldiesMoveRule(play, chess[play], me);
+				}
+				//移动炮
+				else if((play >= 9 && play <= 10)
+						|| (play >= 25 && play <= 26)){
+					rule.cannonAndRookMoveRule(chess[play], chess, me);
+				}
+				//移动车
+				else if((play >= 0 && play <= 1)
+						|| (play >= 16 && play <= 17)){
+					System.out.println("车要上下移动");
+					rule.cannonAndRookMoveRule(chess[play], chess, me);
+				}
+				//移动马
+				else if((play >= 2 && play <= 3)
+						|| (play >= 18 && play <= 19)){
+					rule.horseMoveRule(chess[play], chess, me);
+				}
+				//移动象
+				else if((play >= 4 && play <= 5)
+						|| (play >= 20 && play <= 21)){
+					rule.ministerMoveRule(chess[play], chess, me);
+				}
+				//移动士
+				else if((play >= 6 && play <= 7)
+						|| (play >= 22 && play <= 23)){
+					rule.advisorMoveRule(chess[play], me);
+				}
+				//移动将和帅
+				else if((play == 8) || (play == 24)){
+					rule.kingMoveRule(chess[play], me);
+				}
+				//默认红棋走棋，如果棋子在原地没动
+				if(x == chess[play].getX() && y == chess[play].getY()){
+					st.setText("红棋走棋");
+					chessColor = 2;
+				}
+				else{
+					st.setText("黑棋走棋");
+					chessColor = 1;
 				}
 			}
+			else if(chessColor == 1 && chess[play].getName().charAt(0) == '黑'){
+
+				x = chess[play].getX();
+				y = chess[play].getY();
+				//移动卒、兵
+				if((play >= 11 && play <= 15)
+						|| (play >= 27 && play <= 31)){
+					rule.soldiesMoveRule(play, chess[play], me);
+				}
+				//移动炮
+				else if((play >= 9 && play <= 10)
+						|| (play >= 25 && play <= 26)){
+					rule.cannonAndRookMoveRule(chess[play], chess, me);
+				}
+				//移动车
+				else if((play >= 0 && play <= 1)
+						|| (play >= 16 && play <= 17)){
+					System.out.println("车要上下移动");
+					rule.cannonAndRookMoveRule(chess[play], chess, me);
+				}
+				//移动马
+				else if((play >= 2 && play <= 3)
+						|| (play >= 18 && play <= 19)){
+					rule.horseMoveRule(chess[play], chess, me);
+				}
+				//移动象
+				else if((play >= 4 && play <= 5)
+						|| (play >= 20 && play <= 21)){
+					rule.ministerMoveRule(chess[play], chess, me);
+				}
+				//移动士
+				else if((play >= 6 && play <= 7)
+						|| (play >= 22 && play <= 23)){
+					rule.advisorMoveRule(chess[play], me);
+				}
+				//移动将和帅
+				else if((play == 8) || (play == 24)){
+					rule.kingMoveRule(chess[play], me);
+				}
+				//默认红棋走棋，如果棋子在原地没动
+				if(x == chess[play].getX() && y == chess[play].getY()){
+					st.setText("黑棋走棋");
+					chessColor = 1;
+				}
+				else{
+					st.setText("红棋走棋");
+					chessColor = 2;
+				}
+			
+			}
+			//当前没有任何操作时
+			chessClick = false ;
 		}
-		
+		else{
+			//第一次鼠标点击
+			if(!chessClick){
+				System.out.println("棋子被点击");
+				for(int i=0; i<32; i++){
+					//鼠标如果点击的是棋子
+					if(me.getSource().equals(chess[i])){
+						play=i;
+						//该棋子闪烁
+						chessClick = true;
+						break;
+					}
+				}
+			}
+			else if(chessClick){
+				//停止棋子闪烁
+				for(i=0; i<32; i++){
+					//找到被吃的棋子
+					if(me.getSource().equals(chess[i])){
+						//红棋吃棋
+						if(chessColor == 2 && chess[play].getName().charAt(0) == '红'){
+							x = chess[play].getX();
+							y = chess[play].getY();
+							
+							//卒子和兵吃棋子
+							if((play >= 27 && play <= 31)){
+								rule.soldiesKillRule(chess[play], chess[i]);
+							}
+							//炮吃棋子
+							else if((play >= 9 && play <= 10)
+									&&(play >= 25 && play <= 26)){
+								rule.cannonAndRookKillRule(chess[play], chess[i], chess);
+							}
+							//车吃棋子
+							else if((play >= 0 && play <= 1)
+									&&(play >= 16 && play <= 17)){
+								rule.cannonAndRookKillRule(chess[play], chess[i], chess);
+							}
+							//马吃棋子
+							else if((play >= 2 && play <= 3)
+									&&(play >= 18 && play <= 19)){
+								rule.horseKillRule(chess[play], chess[i], chess);
+							}
+							//象吃棋子
+							else if((play >= 4 && play <= 5)
+									&&(play >= 20 && play <= 21)){
+								rule.ministerKillRule(chess[play], chess[i], chess);
+							}
+							//士吃棋子
+							else if((play >= 6 && play <= 7)
+									&&(play >= 22 && play <= 23)){
+								rule.advisorKillRule(chess[play], chess[i]);
+							}
+							//将、帅吃棋子
+							else if((play == 8) || (play == 24)){
+								rule.kingKillRule(chess[play], chess[i], chess);
+								chess[play].setVisible(true);
+							}
+							//默认红棋走棋，如果棋子在原地没动
+							if(x == chess[play].getX() && y == chess[play].getY()){
+								st.setText("红棋走棋");
+								chessColor = 2;
+								break;
+							}
+							else{
+								st.setText("黑棋走棋");
+								chessColor = 1;
+								break;
+							}
+						}
+						else if(chessColor ==1 && chess[play].getName().charAt(0) == '黑'){
+
+							x = chess[play].getX();
+							y = chess[play].getY();
+							
+							//卒子和兵吃棋子
+							if((play >= 11 && play<=15)
+									||(play >= 27 && play <= 31)){
+								rule.soldiesKillRule(chess[play], chess[i]);
+							}
+							//炮吃棋子
+							else if((play >= 9 && play <= 10)
+									&&(play >= 25 && play <= 26)){
+								rule.cannonAndRookKillRule(chess[play], chess[i], chess);
+							}
+							//车吃棋子
+							else if((play >= 0 && play <= 1)
+									&&(play >= 16 && play <= 17)){
+								rule.cannonAndRookKillRule(chess[play], chess[i], chess);
+							}
+							//马吃棋子
+							else if((play >= 2 && play <= 3)
+									&&(play >= 18 && play <= 19)){
+								rule.horseKillRule(chess[play], chess[i], chess);
+							}
+							//象吃棋子
+							else if((play >= 4 && play <= 5)
+									&&(play >= 20 && play <= 21)){
+								rule.ministerKillRule(chess[play], chess[i], chess);
+							}
+							//士吃棋子
+							else if((play >= 6 && play <= 7)
+									&&(play >= 22 && play <= 23)){
+								rule.advisorKillRule(chess[play], chess[i]);
+							}
+							//将、帅吃棋子
+							else if((play == 8) || (play == 24)){
+								rule.kingKillRule(chess[play], chess[i], chess);
+								chess[play].setVisible(true);
+							}
+							//默认红棋走棋，如果棋子在原地没动
+							if(x == chess[play].getX() && y == chess[play].getY()){
+								st.setText("红棋走棋");
+								chessColor = 2;
+								break;
+							}
+							else{
+								st.setText("黑棋走棋");
+								chessColor = 1;
+								break;
+							}
+						}
+					}
+				}
+				//当前没有任何操作时
+				chessClick = false ;
+				
+				if(!chess[24].isVisible()){
+					JOptionPane.showConfirmDialog(
+						this,"黑棋胜利","玩家一胜利",
+						JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE);
+					//双方都不可以在走棋了
+					chessColor = 3;
+					st.setText("黑棋胜利");
+				}
+				else if (!chess[8].isVisible()){
+					JOptionPane.showConfirmDialog(
+						this,"红棋胜利","玩家二胜利",
+						JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE);
+					chessColor=3;
+					st.setText("红棋胜利");
+				}
+			}
+		}	
 	}
 
 	@Override
@@ -235,35 +515,4 @@ public class ChessBoard extends JFrame implements ActionListener,MouseListener,R
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	/**
-	 ** 重写的线程方法来控制棋子闪烁
-	 */
-	public void run() {
-		while(true){
-			//点击棋子时棋子闪烁
-			if(chessClick){
-				chess[play].setVisible(false);
-				//设置闪烁时间间隔
-				try{
-					t1.sleep(200);
-				}catch(Exception e){
-				}
-				System.out.println("开始闪烁");
-				chess[play].setVisible(true);			
-			}
-			//棋子走动后系统消息提示对方走棋
-			else{
-				st.setVisible(false);
-				try {
-					t1.sleep(200);
-				} catch (Exception e) {	
-				}
-				st.setVisible(true);
-			}
-		}
-		
-	}
-
 }
